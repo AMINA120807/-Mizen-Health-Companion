@@ -306,79 +306,80 @@ export default function RamadanPlanner({ foods }: RamadanPlannerProps) {
               <SugarCurveChart currentGL={combinedTotals.glycemicLoad} />
             </div>
             
-            {/* Spiritual Tracker */}
-            <div className="border-t border-emerald-900/50 pt-8 mt-4">
-              <div className="text-center mb-6">
-                <h2 className="font-heading text-2xl font-bold text-emerald-50 tracking-wide">
-                  {t('ramadan.spiritualGoals')}
-                </h2>
-                <p className="text-sm text-emerald-200/60 mt-1">{t('ramadan.spiritualSubtitle')}</p>
+          </div>
+        )}
+
+        {/* Spiritual Tracker - Always Visible */}
+        <div className="border-t border-emerald-900/50 pt-8 mt-8">
+          <div className="text-center mb-6">
+            <h2 className="font-heading text-2xl font-bold text-emerald-50 tracking-wide">
+              {t('ramadan.spiritualGoals')}
+            </h2>
+            <p className="text-sm text-emerald-200/60 mt-1">{t('ramadan.spiritualSubtitle')}</p>
+          </div>
+
+          <div className="space-y-4">
+            {/* 5 Daily Prayers */}
+            <div className="glass-panel p-5">
+              <h3 className="font-bold text-emerald-100 mb-3 flex items-center gap-2">
+                <span>🕌</span> {t('ramadan.prayers')}
+              </h3>
+              <div className="flex justify-between items-center bg-black/20 rounded-xl p-2 border border-emerald-900/40">
+                {(Object.keys(prayers) as Array<keyof typeof prayers>).map(prayer => (
+                  <div key={prayer} className="flex flex-col items-center gap-1.5 flex-1 cursor-pointer" onClick={() => setPrayers(prev => ({ ...prev, [prayer]: !prev[prayer] }))}>
+                    <label className="text-xs text-emerald-200/60 capitalize font-medium cursor-pointer">{t(`prayer.${prayer}`)}</label>
+                    <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-colors ${prayers[prayer] ? 'bg-emerald-500 text-black' : 'bg-black/40 border border-emerald-800'}`}>
+                      {prayers[prayer] && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>}
+                    </div>
+                  </div>
+                ))}
               </div>
+            </div>
 
-              <div className="space-y-4">
-                {/* 5 Daily Prayers */}
-                <div className="glass-panel p-5">
-                  <h3 className="font-bold text-emerald-100 mb-3 flex items-center gap-2">
-                    <span>🕌</span> {t('ramadan.prayers')}
-                  </h3>
-                  <div className="flex justify-between items-center bg-black/20 rounded-xl p-2 border border-emerald-900/40">
-                    {(Object.keys(prayers) as Array<keyof typeof prayers>).map(prayer => (
-                      <div key={prayer} className="flex flex-col items-center gap-1.5 flex-1">
-                        <label className="text-xs text-emerald-200/60 capitalize font-medium">{t(`prayer.${prayer}`)}</label>
-                        <input 
-                          type="checkbox" 
-                          checked={prayers[prayer]}
-                          onChange={(e) => setPrayers(prev => ({ ...prev, [prayer]: e.target.checked }))}
-                          className="w-5 h-5 rounded-md border-emerald-800 bg-black/40 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-0 cursor-pointer"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Taraweeh & Adhkar */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="glass-panel p-4 flex flex-col justify-center items-center text-center group cursor-pointer hover:bg-white/5 transition-colors" onClick={() => setTaraweeh(!taraweeh)}>
-                    <span className="text-2xl mb-1">{taraweeh ? '✨' : '🌙'}</span>
-                    <span className="text-sm font-semibold text-emerald-100">{t('ramadan.taraweeh')}</span>
-                    <div className={`mt-2 w-full h-1.5 rounded-full ${taraweeh ? 'bg-emerald-500' : 'bg-emerald-900/40'}`}></div>
-                  </div>
-                  
-                  <div className="glass-panel p-4">
-                    <h3 className="font-bold text-emerald-100 mb-3 text-sm text-center">📿 {t('ramadan.adhkar')}</h3>
-                    <div className="flex justify-around">
-                      <div className="flex flex-col items-center gap-1">
-                        <label className="text-[10px] text-emerald-200/60 uppercase">{t('ramadan.morning')}</label>
-                        <input type="checkbox" checked={adhkar.morning} onChange={(e) => setAdhkar(prev => ({...prev, morning: e.target.checked}))} className="w-4 h-4 rounded text-emerald-500 bg-black/40 border-emerald-800 focus:ring-emerald-500 cursor-pointer" />
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <label className="text-[10px] text-emerald-200/60 uppercase">{t('ramadan.evening')}</label>
-                        <input type="checkbox" checked={adhkar.evening} onChange={(e) => setAdhkar(prev => ({...prev, evening: e.target.checked}))} className="w-4 h-4 rounded text-emerald-500 bg-black/40 border-emerald-800 focus:ring-emerald-500 cursor-pointer" />
-                      </div>
+            {/* Taraweeh & Adhkar */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="glass-panel p-4 flex flex-col justify-center items-center text-center group cursor-pointer hover:bg-white/5 transition-colors" onClick={() => setTaraweeh(!taraweeh)}>
+                <span className="text-2xl mb-1">{taraweeh ? '✨' : '🌙'}</span>
+                <span className="text-sm font-semibold text-emerald-100">{t('ramadan.taraweeh')}</span>
+                <div className={`mt-2 w-full h-1.5 rounded-full ${taraweeh ? 'bg-emerald-500' : 'bg-emerald-900/40'}`}></div>
+              </div>
+              
+              <div className="glass-panel p-4">
+                <h3 className="font-bold text-emerald-100 mb-3 text-sm text-center">📿 {t('ramadan.adhkar')}</h3>
+                <div className="flex justify-around">
+                  <div className="flex flex-col items-center gap-1 cursor-pointer" onClick={() => setAdhkar(prev => ({...prev, morning: !prev.morning}))}>
+                    <label className="text-[10px] text-emerald-200/60 uppercase cursor-pointer">{t('ramadan.morning')}</label>
+                    <div className={`w-5 h-5 rounded flex items-center justify-center transition-colors ${adhkar.morning ? 'bg-emerald-500 text-black' : 'bg-black/40 border border-emerald-800'}`}>
+                      {adhkar.morning && <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>}
                     </div>
                   </div>
-                </div>
-
-                {/* Quran Progress */}
-                <div className="glass-panel p-5 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl bg-black/40 p-2 rounded-xl shadow-inner">📖</span>
-                    <div>
-                      <h3 className="font-bold text-emerald-100">{t('ramadan.quranReading')}</h3>
-                      <p className="text-xs text-emerald-200/60">{t('ramadan.pagesReadToday')}</p>
+                  <div className="flex flex-col items-center gap-1 cursor-pointer" onClick={() => setAdhkar(prev => ({...prev, evening: !prev.evening}))}>
+                    <label className="text-[10px] text-emerald-200/60 uppercase cursor-pointer">{t('ramadan.evening')}</label>
+                    <div className={`w-5 h-5 rounded flex items-center justify-center transition-colors ${adhkar.evening ? 'bg-emerald-500 text-black' : 'bg-black/40 border border-emerald-800'}`}>
+                      {adhkar.evening && <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>}
                     </div>
-                  </div>
-                  <div className="flex items-center gap-3 bg-black/30 rounded-xl p-1 border border-emerald-900/30">
-                    <button onClick={() => setQuranPages(Math.max(0, quranPages - 1))} className="w-8 h-8 flex items-center justify-center text-emerald-200 hover:bg-emerald-900/40 rounded-lg transition-colors font-bold">-</button>
-                    <span className="font-black text-xl w-8 text-center text-emerald-50">{quranPages}</span>
-                    <button onClick={() => setQuranPages(quranPages + 1)} className="w-8 h-8 flex items-center justify-center text-emerald-200 hover:bg-emerald-900/40 rounded-lg transition-colors font-bold">+</button>
                   </div>
                 </div>
               </div>
             </div>
-            
+
+            {/* Quran Progress */}
+            <div className="glass-panel p-5 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl bg-black/40 p-2 rounded-xl shadow-inner">📖</span>
+                <div>
+                  <h3 className="font-bold text-emerald-100">{t('ramadan.quranReading')}</h3>
+                  <p className="text-xs text-emerald-200/60">{t('ramadan.pagesReadToday')}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 bg-black/30 rounded-xl p-1 border border-emerald-900/30">
+                <button onClick={() => setQuranPages(Math.max(0, quranPages - 1))} className="w-8 h-8 flex items-center justify-center text-emerald-200 hover:bg-emerald-900/40 rounded-lg transition-colors font-bold">-</button>
+                <span className="font-black text-xl w-8 text-center text-emerald-50">{quranPages}</span>
+                <button onClick={() => setQuranPages(quranPages + 1)} className="w-8 h-8 flex items-center justify-center text-emerald-200 hover:bg-emerald-900/40 rounded-lg transition-colors font-bold">+</button>
+              </div>
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
