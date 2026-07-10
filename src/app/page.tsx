@@ -34,7 +34,8 @@ export default function Home() {
 
   return (
     <div className="space-y-8 py-4 animate-in fade-in duration-500 print-wrapper">
-      <div className="text-center print-hide">
+      <div className="text-center print-hide flex flex-col items-center justify-center">
+        <img src="/icon.png" alt="Mizen Logo" className="w-20 h-20 mb-4 rounded-2xl shadow-lg border border-emerald-900/30" />
         <h1 className="font-heading text-4xl font-extrabold text-gray-900 dark:text-emerald-50 mb-2 tracking-tight">{t('app.title')}</h1>
         <p className="text-gray-500 dark:text-emerald-200/60 font-medium">{t('app.subtitle')}</p>
       </div>
