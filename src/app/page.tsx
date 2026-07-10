@@ -57,18 +57,15 @@ export default function Home() {
           </button>
         </div>
 
-        <div className={`flex flex-col gap-2 glass-panel mx-auto shadow-sm overflow-hidden transition-all duration-500 ease-in-out ${isMenuOpen ? 'max-h-[800px] opacity-100 p-3 mb-6' : 'max-h-0 opacity-0 p-0 border-0'}`}>
+        <div className={`flex flex-col gap-1 glass-panel mx-auto shadow-sm overflow-hidden transition-all duration-500 ease-in-out ${isMenuOpen ? 'max-h-[1200px] opacity-100 p-3 mb-6' : 'max-h-0 opacity-0 p-0 border-0'}`}>
+          
+          {/* Section: Repas & Recettes */}
+          <div className="text-xs font-bold uppercase tracking-wider text-emerald-500/80 px-4 py-2 mt-1">🍽️ Repas & Recettes</div>
           <button 
             onClick={() => { setMode('standard'); setIsMenuOpen(false); }}
             className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'standard' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
             <span className="text-xl">🍽️</span> {t('nav.dailyMeal')}
-          </button>
-          <button 
-            onClick={() => { setMode('tasks'); setIsMenuOpen(false); }}
-            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'tasks' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
-          >
-            <span className="text-xl">✅</span> {t('nav.tasks')}
           </button>
           <button 
             onClick={() => { setMode('weekly'); setIsMenuOpen(false); }}
@@ -77,10 +74,10 @@ export default function Home() {
             <span className="text-xl">📅</span> {t('nav.weekly')}
           </button>
           <button 
-            onClick={() => { setMode('ramadan'); setIsMenuOpen(false); }}
-            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'ramadan' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-[#f57f17] border-l-4 border-[#f57f17]' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+            onClick={() => { setMode('recipe'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'recipe' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
-            <span className="text-xl">🌙</span> {t('nav.ramadanMode')}
+            <span className="text-xl">🍳</span> {t('nav.createRecipe')}
           </button>
           <button 
             onClick={() => { setMode('history'); setIsMenuOpen(false); }}
@@ -88,18 +85,11 @@ export default function Home() {
           >
             <span className="text-xl">📊</span> {t('nav.history')}
           </button>
-          <button 
-            onClick={() => { setMode('recipe'); setIsMenuOpen(false); }}
-            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'recipe' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
-          >
-            <span className="text-xl">🍳</span> {t('nav.createRecipe')}
-          </button>
-          <button 
-            onClick={() => { setMode('dietitians'); setIsMenuOpen(false); }}
-            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'dietitians' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
-          >
-            <span className="text-xl">👨‍⚕️</span> {t('nav.dietitians')}
-          </button>
+
+          <div className="h-px w-full bg-emerald-900/30 my-2"></div>
+
+          {/* Section: Santé & Outils */}
+          <div className="text-xs font-bold uppercase tracking-wider text-emerald-500/80 px-4 py-2">⭐ Santé & Outils</div>
           <button 
             onClick={() => { setMode('hub'); setIsMenuOpen(false); }}
             className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'hub' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
@@ -107,10 +97,10 @@ export default function Home() {
             <span className="text-xl">⭐</span> {t('nav.hub')}
           </button>
           <button 
-            onClick={() => { setMode('community'); setIsMenuOpen(false); }}
-            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'community' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+            onClick={() => { setMode('chef'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'chef' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
-            <span className="text-xl">🌍</span> {t('nav.community')}
+            <span className="text-xl">🧑‍🍳</span> {t('nav.chef')}
           </button>
           <button 
             onClick={() => { setMode('scanner'); setIsMenuOpen(false); }}
@@ -119,14 +109,27 @@ export default function Home() {
             <span className="text-xl">📸</span> {t('nav.scanner')}
           </button>
           <button 
-            onClick={() => { setMode('chef'); setIsMenuOpen(false); }}
-            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'chef' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+            onClick={() => { setMode('community'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'community' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
-            <span className="text-xl">🧑‍🍳</span> {t('nav.chef')}
+            <span className="text-xl">🌍</span> {t('nav.community')}
           </button>
-          
-          <div className="h-px w-full bg-emerald-900/50 my-1"></div>
-          
+          <button 
+            onClick={() => { setMode('dietitians'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'dietitians' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+          >
+            <span className="text-xl">👨‍⚕️</span> {t('nav.dietitians')}
+          </button>
+          <button 
+            onClick={() => { setMode('ramadan'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'ramadan' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-[#f57f17] border-l-4 border-[#f57f17]' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+          >
+            <span className="text-xl">🌙</span> {t('nav.ramadanMode')}
+          </button>
+
+          <div className="h-px w-full bg-emerald-900/30 my-2"></div>
+
+          {/* Section: Application */}
           <button 
             onClick={() => { setShowInstallModal(true); setIsMenuOpen(false); }}
             className="py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent"
