@@ -126,7 +126,7 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
 
       {/* Step 1: Add Ingredients */}
       <div className="mb-8">
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           {t('recipeBuilder.searchIngredient')}
         </label>
         <div className="relative">
@@ -135,19 +135,19 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
             placeholder={t('search.placeholder')}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full p-3 border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
             dir="auto"
           />
           {searchResults.length > 0 && (
-            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-100 rounded-xl shadow-lg">
+            <div className="absolute z-10 w-full mt-1 bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 rounded-xl shadow-lg">
               {searchResults.map(food => (
                 <button
                   key={food.id}
                   onClick={() => addIngredient(food)}
-                  className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-50 last:border-0 flex justify-between items-center"
+                  className="w-full text-left px-4 py-3 hover:bg-gray-50 dark:bg-slate-800/50 border-b border-gray-50 last:border-0 flex justify-between items-center"
                 >
-                  <span className="font-medium text-gray-900">{getFoodName(food)}</span>
-                  <span className="text-sm text-gray-500">{food.calories_per_100g} kcal / 100g</span>
+                  <span className="font-medium text-gray-900 dark:text-gray-100">{getFoodName(food)}</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">{food.calories_per_100g} kcal / 100g</span>
                 </button>
               ))}
             </div>
@@ -158,12 +158,12 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
       {/* Step 2: Adjust Weights */}
       {ingredients.length > 0 && (
         <div className="mb-8 space-y-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
             {t('recipeBuilder.ingredientsList')}
           </label>
           {ingredients.map((item, index) => (
-            <div key={index} className="flex items-center gap-3 bg-white p-3 rounded-xl border border-gray-100 shadow-sm">
-              <div className="flex-1 font-medium text-gray-900 truncate">
+            <div key={index} className="flex items-center gap-3 bg-white dark:bg-slate-900 p-3 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm">
+              <div className="flex-1 font-medium text-gray-900 dark:text-gray-100 truncate">
                 {getFoodName(item.food)}
               </div>
               <div className="flex items-center gap-2">
@@ -172,9 +172,9 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
                   min="1"
                   value={item.weightGrams || ""}
                   onChange={(e) => updateIngredientWeight(index, Number(e.target.value))}
-                  className="w-20 p-2 border border-gray-200 rounded-lg text-center focus:ring-2 focus:ring-primary focus:outline-none"
+                  className="w-20 p-2 border border-gray-200 dark:border-gray-700 rounded-lg text-center focus:ring-2 focus:ring-primary focus:outline-none"
                 />
-                <span className="text-gray-500 text-sm">g</span>
+                <span className="text-gray-500 dark:text-gray-400 text-sm">g</span>
               </div>
               <button 
                 onClick={() => removeIngredient(index)}
@@ -185,7 +185,7 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
               </button>
             </div>
           ))}
-          <div className="text-right text-sm text-gray-600 font-medium pt-2 border-t border-gray-100">
+          <div className="text-right text-sm text-gray-600 dark:text-gray-400 font-medium pt-2 border-t border-gray-100 dark:border-gray-800">
             {t('recipeBuilder.totalWeight')} {totalWeight}g
           </div>
         </div>
@@ -195,7 +195,7 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
       {ingredients.length > 0 && (
         <div className="space-y-4 mb-8 bg-primary/5 p-5 rounded-xl border border-primary/10">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               {t('recipeBuilder.recipeName')}
             </label>
             <input
@@ -203,12 +203,12 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
               value={recipeName}
               onChange={(e) => setRecipeName(e.target.value)}
               placeholder="e.g. My healthy couscous"
-              className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none"
+              className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none"
               dir="auto"
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               {t('recipeBuilder.portionSize')}
             </label>
             <input
@@ -216,7 +216,7 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
               value={portionGrams}
               onChange={(e) => setPortionGrams(Number(e.target.value))}
               placeholder="e.g. 250"
-              className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none"
+              className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none"
             />
           </div>
         </div>
@@ -233,3 +233,4 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
     </div>
   );
 }
+

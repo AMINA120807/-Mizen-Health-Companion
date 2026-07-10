@@ -62,15 +62,15 @@ export default function MealBuilder({ foods }: MealBuilderProps) {
         <div className="w-full glass rounded-2xl p-6 shadow-xl space-y-6 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent"></div>
           
-          <h2 className="font-heading text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
+          <h2 className="font-heading text-2xl font-bold text-gray-900 dark:text-gray-100 tracking-tight flex items-center gap-2">
             {t('meal.yourMeal')}
           </h2>
           
           <div className="space-y-4">
             {mealItems.map(item => (
-              <div key={item.id} className="group flex flex-col gap-3 p-4 bg-white/50 border border-gray-100 rounded-xl hover-lift">
+              <div key={item.id} className="group flex flex-col gap-3 p-4 bg-white/50 border border-gray-100 dark:border-gray-800 rounded-xl hover-lift">
                 <div className="flex justify-between items-start">
-                  <span className="font-heading font-semibold text-gray-900 text-lg">{getFoodName(item.food)}</span>
+                  <span className="font-heading font-semibold text-gray-900 dark:text-gray-100 text-lg">{getFoodName(item.food)}</span>
                   <button 
                     onClick={() => handleRemoveFood(item.id)}
                     className="text-gray-400 hover:text-destructive transition-colors"
@@ -79,8 +79,8 @@ export default function MealBuilder({ foods }: MealBuilderProps) {
                   </button>
                 </div>
                 
-                <div className="flex justify-between items-center bg-white p-2 rounded-lg shadow-sm border border-gray-50">
-                  <span className="text-gray-500 text-sm font-medium">
+                <div className="flex justify-between items-center bg-white dark:bg-slate-900 p-2 rounded-lg shadow-sm border border-gray-50">
+                  <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
                     {item.food.typical_portion_label} <span className="text-gray-400">({item.food.typical_portion_grams}g)</span>
                   </span>
                   <div className="flex items-center gap-2">
@@ -91,7 +91,7 @@ export default function MealBuilder({ foods }: MealBuilderProps) {
                       step="0.5" 
                       value={item.quantity}
                       onChange={(e) => handleUpdateQuantity(item.id, parseFloat(e.target.value) || 0)}
-                      className="w-16 p-1.5 border border-gray-200 rounded-md text-center focus:ring-2 focus:ring-primary focus:border-transparent outline-none font-semibold text-primary"
+                      className="w-16 p-1.5 border border-gray-200 dark:border-gray-700 rounded-md text-center focus:ring-2 focus:ring-primary focus:border-transparent outline-none font-semibold text-primary"
                     />
                   </div>
                 </div>
@@ -184,3 +184,4 @@ export default function MealBuilder({ foods }: MealBuilderProps) {
     </div>
   );
 }
+

@@ -4,6 +4,8 @@ import "./globals.css";
 import { LanguageProvider } from "../contexts/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ErrorBoundary from "../components/ErrorBoundary";
+import { ThemeProvider } from "../components/ThemeProvider";
+import { ThemeToggle } from "../components/ThemeToggle";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -24,22 +26,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
-      <body className="font-sans min-h-screen bg-gray-50 text-gray-900 bg-[url('/patterns/cubes.png')]">
-        <LanguageProvider>
-          <main className="max-w-md mx-auto bg-white/80 backdrop-blur-xl min-h-screen shadow-2xl border-x border-gray-100 flex flex-col">
-            <header className="p-4 flex justify-end border-b border-gray-100">
-              <LanguageSwitcher />
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
+      <body className="font-sans min-h-screen">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <LanguageProvider>
+            <main className="max-w-md mx-auto glass min-h-screen shadow-2xl border-x border-gray-100 dark:border-gray-800 flex flex-col">
+              <header className="p-4 flex justify-between items-center border-b border-gray-100 dark:border-white/10">
+                <ThemeToggle />
+                <LanguageSwitcher />
             </header>
             <div className="p-4 flex-1">
               <ErrorBoundary>
                 {children}
               </ErrorBoundary>
             </div>
-          </main>
-        </LanguageProvider>
+            </main>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+
 

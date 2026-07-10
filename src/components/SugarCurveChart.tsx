@@ -32,8 +32,8 @@ export default function SugarCurveChart({ currentGL, swapGL }: SugarCurveChartPr
   const peakColor = peak > 140 ? "#ef4444" : peak > 120 ? "#eab308" : "#10b981";
 
   return (
-    <div className="w-full h-64 mt-4 bg-white/60 p-4 rounded-xl border border-gray-100 shadow-inner">
-      <h4 className="text-sm font-semibold text-gray-700 mb-4 font-heading text-center">
+    <div className="w-full h-64 mt-4 bg-white/60 p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-inner">
+      <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4 font-heading text-center">
         {t('chart.title')}
       </h4>
       <ResponsiveContainer width="100%" height="100%">
@@ -88,3 +88,4 @@ export default function SugarCurveChart({ currentGL, swapGL }: SugarCurveChartPr
     </div>
   );
 }
+

@@ -74,7 +74,7 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
           <h2 className="font-heading text-2xl font-bold text-primary tracking-tight">
             {t('weekly.title')}
           </h2>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 dark:text-gray-400 text-sm">
             {t('weekly.subtitle')}
           </p>
         </div>
@@ -97,14 +97,14 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
       {/* Search Modal (Only visible when adding a meal) */}
       {activeDay !== null && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 print-hide">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
             <button 
               onClick={() => { setActiveDay(null); setQuery(""); }}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-gray-400"
             >
               ✕
             </button>
-            <h3 className="font-bold text-lg mb-4 text-gray-900">
+            <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-gray-100">
               {t('weekly.addTo')} {daysOfWeek[activeDay]}
             </h3>
             
@@ -115,7 +115,7 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
                 placeholder={t('search.placeholder')}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-slate-800/50 focus:outline-none focus:ring-2 focus:ring-primary"
                 dir="auto"
               />
             </div>
@@ -126,14 +126,14 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
                   <button
                     key={food.id}
                     onClick={() => addMealToDay(activeDay, food)}
-                    className="w-full text-left px-4 py-3 hover:bg-primary/5 rounded-xl border border-gray-100 flex justify-between items-center transition-colors"
+                    className="w-full text-left px-4 py-3 hover:bg-primary/5 rounded-xl border border-gray-100 dark:border-gray-800 flex justify-between items-center transition-colors"
                   >
-                    <span className="font-medium text-gray-900">{getFoodName(food)}</span>
-                    <span className="text-sm text-gray-500 bg-gray-100 px-2 py-0.5 rounded">{food.calories_per_100g} kcal</span>
+                    <span className="font-medium text-gray-900 dark:text-gray-100">{getFoodName(food)}</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-slate-800 px-2 py-0.5 rounded">{food.calories_per_100g} kcal</span>
                   </button>
                 ))
               ) : query.trim() ? (
-                <p className="text-center text-gray-500 py-4">{t('search.noResults')}</p>
+                <p className="text-center text-gray-500 dark:text-gray-400 py-4">{t('search.noResults')}</p>
               ) : null}
             </div>
           </div>
@@ -143,10 +143,10 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
       {/* 7-Day Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 print-grid">
         {plan.map((dayPlan) => (
-          <div key={dayPlan.dayId} className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full print-card">
+          <div key={dayPlan.dayId} className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full print-card">
             {/* Day Header */}
-            <div className="bg-primary/5 border-b border-gray-100 p-4 flex justify-between items-center print-card-header">
-              <h3 className="font-bold text-gray-900">{daysOfWeek[dayPlan.dayId]}</h3>
+            <div className="bg-primary/5 border-b border-gray-100 dark:border-gray-800 p-4 flex justify-between items-center print-card-header">
+              <h3 className="font-bold text-gray-900 dark:text-gray-100">{daysOfWeek[dayPlan.dayId]}</h3>
               <button 
                 onClick={() => setActiveDay(dayPlan.dayId)}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors print-hide"
@@ -168,8 +168,8 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
                     <div className="flex items-start gap-2">
                       <span className="text-primary mt-1 text-xs">●</span>
                       <div>
-                        <p className="font-medium text-sm text-gray-900 leading-tight">{getFoodName(meal)}</p>
-                        <p className="text-xs text-gray-500">{meal.calories_per_100g} kcal/100g</p>
+                        <p className="font-medium text-sm text-gray-900 dark:text-gray-100 leading-tight">{getFoodName(meal)}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{meal.calories_per_100g} kcal/100g</p>
                       </div>
                     </div>
                     <button 
@@ -200,3 +200,4 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
     </div>
   );
 }
+

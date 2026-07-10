@@ -140,7 +140,7 @@ export default function DailyTasks() {
     }
   };
 
-  if (!isLoaded) return <div className="animate-pulse h-64 bg-gray-100 rounded-2xl"></div>;
+  if (!isLoaded) return <div className="animate-pulse h-64 bg-gray-100 dark:bg-slate-800 rounded-2xl"></div>;
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6 animate-fade-in">
@@ -149,7 +149,7 @@ export default function DailyTasks() {
           <h2 className="text-3xl font-extrabold text-primary tracking-tight">
             Daily Goals & Tasks
           </h2>
-          <p className="text-gray-500 mt-1">Track your wellness habits, everyday.</p>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">Track your wellness habits, everyday.</p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
@@ -172,11 +172,11 @@ export default function DailyTasks() {
               
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl bg-white shadow-sm p-3 rounded-2xl">
+                  <span className="text-3xl bg-white dark:bg-slate-900 shadow-sm p-3 rounded-2xl">
                     {getCategoryIcon(task.category)}
                   </span>
                   <div>
-                    <h3 className={`font-bold text-lg ${isComplete ? 'text-primary' : 'text-gray-800'}`}>
+                    <h3 className={`font-bold text-lg ${isComplete ? 'text-primary' : 'text-gray-800 dark:text-gray-200'}`}>
                       {task.title}
                     </h3>
                     <p className="text-sm text-gray-400 capitalize">
@@ -196,14 +196,14 @@ export default function DailyTasks() {
 
               <div className="mt-6 flex flex-col gap-2">
                 <div className="flex justify-between items-end">
-                  <div className="text-2xl font-black text-gray-800 tracking-tight">
+                  <div className="text-2xl font-black text-gray-800 dark:text-gray-200 tracking-tight">
                     {task.currentCount} <span className="text-sm font-semibold text-gray-400">/ {task.targetCount} {task.unit}</span>
                   </div>
                   {isComplete && <span className="text-primary font-bold text-sm animate-fade-in">Completed! 🎉</span>}
                 </div>
                 
                 {/* Custom Progress Bar */}
-                <div className="h-4 w-full bg-gray-100 rounded-full overflow-hidden shadow-inner">
+                <div className="h-4 w-full bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden shadow-inner">
                   <div 
                     className={`h-full transition-all duration-700 ease-out ${isComplete ? 'bg-primary' : 'bg-emerald-400'}`}
                     style={{ width: `${progressPercent}%` }}
@@ -214,7 +214,7 @@ export default function DailyTasks() {
                   <button
                     onClick={() => handleUpdateProgress(task.id, -1)}
                     disabled={task.currentCount === 0}
-                    className="flex-1 py-2 rounded-xl bg-gray-50 text-gray-600 hover:bg-gray-100 disabled:opacity-50 transition-colors font-bold border border-gray-100 shadow-sm"
+                    className="flex-1 py-2 rounded-xl bg-gray-50 dark:bg-slate-800/50 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:bg-slate-800 disabled:opacity-50 transition-colors font-bold border border-gray-100 dark:border-gray-800 shadow-sm"
                   >
                     -
                   </button>
@@ -243,32 +243,32 @@ export default function DailyTasks() {
           <div className="glass-panel p-8 w-full max-w-md animate-slide-up relative">
             <button 
               onClick={() => setShowAddModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-800"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 dark:text-gray-200"
             >
               ✕
             </button>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Create New Goal</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Create New Goal</h3>
             
             <form onSubmit={handleAddTask} className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Goal Title</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Goal Title</label>
                 <input 
                   type="text" 
                   required
                   value={newTaskTitle}
                   onChange={e => setNewTaskTitle(e.target.value)}
                   placeholder="e.g., Take Vitamins"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:outline-none transition-shadow"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary focus:outline-none transition-shadow"
                 />
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Category</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Category</label>
                   <select 
                     value={newTaskCategory}
                     onChange={e => setNewTaskCategory(e.target.value as TaskCategory)}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:outline-none bg-white"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary focus:outline-none bg-white dark:bg-slate-900"
                   >
                     <option value="hydration">Hydration 💧</option>
                     <option value="medication">Medication 💊</option>
@@ -280,26 +280,26 @@ export default function DailyTasks() {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Target Number</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Target Number</label>
                   <input 
                     type="number" 
                     min="1"
                     required
                     value={newTaskTarget}
                     onChange={e => setNewTaskTarget(Number(e.target.value))}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Unit (Optional)</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Unit (Optional)</label>
                 <input 
                   type="text" 
                   value={newTaskUnit}
                   onChange={e => setNewTaskUnit(e.target.value)}
                   placeholder="e.g., pills, glasses, steps"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:outline-none transition-shadow"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary focus:outline-none transition-shadow"
                 />
               </div>
 
@@ -316,3 +316,4 @@ export default function DailyTasks() {
     </div>
   );
 }
+
