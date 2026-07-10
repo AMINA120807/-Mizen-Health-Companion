@@ -27,6 +27,10 @@ const translations: Translations = {
   "nav.dietitians": { en: "Experts", fr: "Experts", ar: "المختصين", dar: "المختصين" },
   "nav.weekly": { en: "Weekly Plan", fr: "Plan Hebdo", ar: "خطة أسبوعية", dar: "خطة سمانة" },
   "nav.tasks": { en: "Daily Goals", fr: "Objectifs", ar: "أهداف يومية", dar: "أهداف يومية" },
+  "nav.hub": { en: "Health Hub", fr: "Espace Santé", ar: "مركز الصحة", dar: "ركن الصحة" },
+  "nav.community": { en: "Community", fr: "Communauté", ar: "المجتمع", dar: "المجتمع" },
+  "nav.scanner": { en: "Scanner", fr: "Scanner", ar: "ماسح", dar: "سكانير" },
+  "nav.chef": { en: "AI Chef", fr: "Chef IA", ar: "شيف ذكي", dar: "الشاف الذكي" },
   "nav.installApp": { en: "Install App", fr: "Installer l'Application", ar: "تثبيت التطبيق", dar: "تثبيت التطبيق" },
 
   // Search
@@ -166,7 +170,47 @@ const translations: Translations = {
   "install.androidStep3": { en: "Confirm by tapping", fr: "Confirmez en appuyant sur", ar: "قم بالتأكيد بالضغط على", dar: "أكد بالضغط على" },
   "install.androidStep3Bold1": { en: "\"Add\"", fr: "\"Ajouter\"", ar: "\"إضافة\"", dar: "\"إضافة\"" },
   "install.androidStep3Bold2": { en: "\"Install\"", fr: "\"Installer\"", ar: "\"تثبيت\"", dar: "\"تثبيت\"" },
-  "install.gotIt": { en: "Got it!", fr: "J'ai compris !", ar: "فهمت!", dar: "فهمت!" }
+  "install.gotIt": { en: "Got it!", fr: "J'ai compris !", ar: "فهمت!", dar: "فهمت!" },
+
+  // Health Hub (Phase 1)
+  "hub.title": { en: "Health Hub", fr: "Espace Santé", ar: "مركز الصحة", dar: "ركن الصحة" },
+  "hub.waterTitle": { en: "Hydration", fr: "Hydratation", ar: "الترطيب", dar: "شريب الما" },
+  "hub.waterDesc": { en: "Goal: 2L per day", fr: "Objectif : 2L par jour", ar: "الهدف: 2 لتر يوميا", dar: "الهدف: 2 لتر فاليوم" },
+  "hub.sleepTitle": { en: "Sleep Tracker", fr: "Sommeil", ar: "تتبع النوم", dar: "الرقاد" },
+  "hub.sleepDesc": { en: "How many hours did you sleep?", fr: "Combien d'heures avez-vous dormi ?", ar: "كم ساعة نمت؟", dar: "شحال رقدت من ساعة؟" },
+  "hub.sleepLog": { en: "Log Sleep", fr: "Enregistrer", ar: "سجل النوم", dar: "سجل الرقاد" },
+  "hub.challengesTitle": { en: "Weekly Challenges", fr: "Défis Santé", ar: "تحديات الأسبوع", dar: "تحديات السمانة" },
+  "hub.mizenPoints": { en: "Mizen Points", fr: "Points Mizen", ar: "نقاط ميزان", dar: "نقاط ميزان" },
+  "challenge.veggies": { en: "Eat 5 portions of vegetables today", fr: "Mangez 5 portions de légumes", ar: "تناول 5 حصص من الخضار اليوم", dar: "كول 5 حبات خضرة اليوم" },
+  "challenge.nosugar": { en: "No white sugar for 24h", fr: "Zéro sucre blanc pendant 24h", ar: "بدون سكر أبيض لمدة 24 ساعة", dar: "زيرو سكر أبيض لـ 24 ساعة" },
+  "challenge.steps": { en: "Walk 10,000 steps", fr: "Marchez 10 000 pas", ar: "امش 10,000 خطوة", dar: "امشي 10,000 خطوة" },
+  "hub.complete": { en: "Complete", fr: "Terminer", ar: "إكمال", dar: "كمل" },
+  "hub.completed": { en: "Completed!", fr: "Terminé !", ar: "مكتمل!", dar: "كملتها!" },
+
+  // Shopping List (Phase 2)
+  "shopping.generate": { en: "Shopping List", fr: "Liste de Courses", ar: "قائمة التسوق", dar: "قائمة القضيان" },
+  "shopping.title": { en: "Your Weekly Groceries", fr: "Vos Courses Hebdomadaires", ar: "مشترياتك الأسبوعية", dar: "قضيانك تاع السمانة" },
+  "shopping.empty": { en: "Add meals to your week to generate a list.", fr: "Ajoutez des repas à votre semaine pour générer une liste.", ar: "أضف وجبات إلى أسبوعك لإنشاء قائمة.", dar: "زيد ماكلة للسمانة باش نوجدو القائمة." },
+  
+  // Community Feed (Phase 2)
+  "nav.community": { en: "Community", fr: "Communauté", ar: "المجتمع", dar: "المجتمع" },
+  "community.title": { en: "Mizen Community", fr: "Communauté Mizen", ar: "مجتمع ميزان", dar: "مجتمع ميزان" },
+  "community.subtitle": { en: "Share and discover healthy meals", fr: "Partagez et découvrez des repas sains", ar: "شارك واكتشف وجبات صحية", dar: "شارك واكتشف ماكلة صحية" },
+  "community.shareBtn": { en: "Share My Meal", fr: "Partager Mon Repas", ar: "شارك وجبتي", dar: "شارك وجبتي" },
+  "community.likes": { en: "Likes", fr: "J'aime", ar: "إعجابات", dar: "جامات" },
+
+  // Scanner & AI Chef (Phase 3)
+  "nav.scanner": { en: "Barcode Scanner", fr: "Scanner Code-barres", ar: "ماسح الباركود", dar: "سكانير" },
+  "nav.chef": { en: "AI Chef", fr: "Chef IA", ar: "الشيف الذكي", dar: "الشاف الذكي" },
+  "scanner.title": { en: "Product Scanner", fr: "Scanner de Produits", ar: "ماسح المنتجات", dar: "سكانير المنتجات" },
+  "scanner.subtitle": { en: "Scan a product to check its nutritional value", fr: "Scannez un produit pour voir sa valeur nutritionnelle", ar: "امسح منتج للتحقق من قيمته الغذائية", dar: "سكاني منتج باش تشوف واش فيه" },
+  "scanner.scanBtn": { en: "Simulate Scan", fr: "Simuler un Scan", ar: "محاكاة المسح", dar: "سيي تسكاني" },
+  "scanner.barcode": { en: "Enter Barcode (e.g. 12345)", fr: "Entrez le Code-barres (ex. 12345)", ar: "أدخل الباركود (مثل 12345)", dar: "اكتب الكود (مثلا 12345)" },
+  "chef.title": { en: "Mizen AI Chef", fr: "Chef IA Mizen", ar: "شيف ميزان الذكي", dar: "شاف ميزان" },
+  "chef.subtitle": { en: "What's in your fridge? Let's make a healthy meal!", fr: "Qu'avez-vous dans le frigo ? Faisons un repas sain !", ar: "ماذا يوجد في ثلاجتك؟ لنجعل وجبة صحية!", dar: "واش كاين في فريجيدارك؟ نديرو ماكلة صحية!" },
+  "chef.ingredients": { en: "Enter ingredients (e.g. Chicken, Olives...)", fr: "Entrez vos ingrédients (ex. Poulet, Olives...)", ar: "أدخل المكونات (مثل الدجاج، الزيتون...)", dar: "اكتب واش عندك (دجاج، زيتون...)" },
+  "chef.generateBtn": { en: "Generate Recipe", fr: "Générer une Recette", ar: "توليد وصفة", dar: "اعطيني وصفة" },
+  "chef.generating": { en: "Chef is thinking...", fr: "Le Chef réfléchit...", ar: "الشيف يفكر...", dar: "الشاف راه يخمم..." }
 };
 
 interface LanguageContextType {

@@ -18,6 +18,7 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
   const { t, getFoodName } = useTranslation();
   const [activeDay, setActiveDay] = useState<number | null>(null);
   const [query, setQuery] = useState("");
+  const [showShoppingList, setShowShoppingList] = useState(false);
   
   // Initialize 7 days
   const [plan, setPlan] = useState<DayPlan[]>(
@@ -66,6 +67,22 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
     window.print();
   };
 
+  // Generate Shopping List Data
+  const shoppingList = useMemo(() => {
+    const list = new Map<string, { count: number, name: string }>();
+    plan.forEach(day => {
+      day.meals.forEach(meal => {
+        const id = meal.id;
+        if (list.has(id)) {
+          list.get(id)!.count += 1;
+        } else {
+          list.set(id, { count: 1, name: getFoodName(meal) });
+        }
+      });
+    });
+    return Array.from(list.values());
+  }, [plan, getFoodName]);
+
   return (
     <div className="w-full transition-all fade-in print-container">
       {/* Header & Print Button */}
@@ -78,15 +95,23 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
             {t('weekly.subtitle')}
           </p>
         </div>
-        <button
-          onClick={handlePrint}
-          className="bg-primary text-primary-foreground font-bold py-3 px-6 rounded-xl shadow hover:shadow-lg transition-all flex items-center gap-2"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
-          </svg>
-          {t('weekly.print')}
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setShowShoppingList(true)}
+            className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-100 font-bold py-3 px-6 rounded-xl shadow hover:shadow-md transition-all flex items-center gap-2"
+          >
+            🛒 {t('shopping.generate')}
+          </button>
+          <button
+            onClick={handlePrint}
+            className="bg-primary text-primary-foreground font-bold py-3 px-6 rounded-xl shadow hover:shadow-lg transition-all flex items-center gap-2"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+            </svg>
+            {t('weekly.print')}
+          </button>
+        </div>
       </div>
 
       {/* Print-only title (hidden on screen) */}
@@ -197,6 +222,45 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
           </div>
         ))}
       </div>
+
+      {/* Shopping List Modal */}
+      {showShoppingList && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 print-hide">
+          <div className="bg-white dark:bg-emerald-950 rounded-2xl w-full max-w-md p-6 shadow-2xl relative border border-emerald-900/30">
+            <button 
+              onClick={() => setShowShoppingList(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-emerald-200/60"
+            >
+              ✕
+            </button>
+            <h3 className="font-bold text-2xl mb-2 text-emerald-900 dark:text-emerald-50 flex items-center gap-2">
+              🛒 {t('shopping.title')}
+            </h3>
+            
+            <div className="mt-4 max-h-[60vh] overflow-y-auto pr-2 space-y-2">
+              {shoppingList.length === 0 ? (
+                <p className="text-gray-500 dark:text-emerald-200/60 italic p-4 text-center">{t('shopping.empty')}</p>
+              ) : (
+                <ul className="space-y-2">
+                  {shoppingList.map((item, idx) => (
+                    <li key={idx} className="flex justify-between items-center p-3 bg-gray-50 dark:bg-emerald-900/20 rounded-xl border border-gray-100 dark:border-emerald-800/50">
+                      <span className="font-medium text-gray-900 dark:text-emerald-100">{item.name}</span>
+                      <span className="bg-emerald-100 dark:bg-emerald-800/50 text-emerald-800 dark:text-emerald-200 px-3 py-1 rounded-full font-bold text-sm">x {item.count}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            
+            <button 
+              onClick={() => setShowShoppingList(false)}
+              className="w-full mt-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl shadow transition-colors"
+            >
+              {t('hub.complete')}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

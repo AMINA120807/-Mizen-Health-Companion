@@ -10,12 +10,16 @@ import RecipeBuilder from '../components/RecipeBuilder';
 import DietitianDirectory from '../components/DietitianDirectory';
 import WeeklyPlanner from '../components/WeeklyPlanner';
 import DailyTasks from '../components/DailyTasks';
+import HealthHub from '../components/HealthHub';
+import CommunityFeed from '../components/CommunityFeed';
+import BarcodeScanner from '../components/BarcodeScanner';
+import AIChef from '../components/AIChef';
 import InstallModal from '../components/InstallModal';
 import { useTranslation } from '../contexts/LanguageContext';
 
 export default function Home() {
   const [foods, setFoods] = useState<FoodItem[]>([]);
-  const [mode, setMode] = useState<'standard' | 'ramadan' | 'history' | 'recipe' | 'dietitians' | 'weekly' | 'tasks'>('standard');
+  const [mode, setMode] = useState<'standard' | 'ramadan' | 'history' | 'recipe' | 'dietitians' | 'weekly' | 'tasks' | 'hub' | 'community' | 'scanner' | 'chef'>('standard');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showInstallModal, setShowInstallModal] = useState(false);
   const { t } = useTranslation();
@@ -96,6 +100,30 @@ export default function Home() {
           >
             <span className="text-xl">👨‍⚕️</span> {t('nav.dietitians')}
           </button>
+          <button 
+            onClick={() => { setMode('hub'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'hub' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+          >
+            <span className="text-xl">⭐</span> {t('nav.hub')}
+          </button>
+          <button 
+            onClick={() => { setMode('community'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'community' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+          >
+            <span className="text-xl">🌍</span> {t('nav.community')}
+          </button>
+          <button 
+            onClick={() => { setMode('scanner'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'scanner' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+          >
+            <span className="text-xl">📸</span> {t('nav.scanner')}
+          </button>
+          <button 
+            onClick={() => { setMode('chef'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'chef' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+          >
+            <span className="text-xl">🧑‍🍳</span> {t('nav.chef')}
+          </button>
           
           <div className="h-px w-full bg-emerald-900/50 my-1"></div>
           
@@ -110,6 +138,10 @@ export default function Home() {
 
       {mode === 'standard' && <MealBuilder foods={foods} />}
       {mode === 'tasks' && <DailyTasks />}
+      {mode === 'hub' && <HealthHub />}
+      {mode === 'community' && <CommunityFeed />}
+      {mode === 'scanner' && <BarcodeScanner />}
+      {mode === 'chef' && <AIChef />}
       {mode === 'weekly' && <WeeklyPlanner foods={foods} />}
       {mode === 'ramadan' && <RamadanPlanner foods={foods} />}
       {mode === 'history' && <HistoryTab />}
