@@ -162,7 +162,7 @@ export default function RamadanPlanner({ foods }: RamadanPlannerProps) {
         </div>
 
         {/* Search Engine - Dark Mode Wrapper */}
-        <div className="[&_input]:bg-white/5 [&_input]:border-white/10 [&_input]:text-white [&_input]:placeholder-emerald-200/30 [&_.bg-white dark:bg-slate-900]:bg-black/40 [&_.bg-white dark:bg-slate-900]:border-white/10 [&_.text-gray-900 dark:text-gray-100]:text-emerald-50 [&_.text-gray-500 dark:text-gray-400]:text-emerald-200/50 [&_.border-gray-100 dark:border-gray-800]:border-white/10 [&_.bg-gray-50 dark:bg-slate-800/50]:bg-white/5">
+        <div className="[&_input]:bg-white/5 [&_input]:border-white/10 [&_input]:text-white [&_input]:placeholder-emerald-200/30 [&_.bg-white dark:bg-emerald-950/40]:bg-black/40 [&_.bg-white dark:bg-emerald-950/40]:border-white/10 [&_.text-gray-900 dark:text-emerald-50]:text-emerald-50 [&_.text-gray-500 dark:text-emerald-200/60]:text-emerald-200/50 [&_.border-gray-100 dark:border-emerald-900/50]:border-white/10 [&_.bg-gray-50 dark:bg-emerald-900/20]:bg-white/5">
           <SearchEngine foods={foods} onAddFood={handleAddFood} />
         </div>
 
@@ -260,7 +260,7 @@ export default function RamadanPlanner({ foods }: RamadanPlannerProps) {
             </div>
 
             {/* Sugar Curve Chart (Dark Theme Mode Passed implicitly or handled inside) */}
-            <div className="[&_.bg-white dark:bg-slate-900]:bg-black/40 [&_.bg-white dark:bg-slate-900]:border-white/10 [&_.text-gray-900 dark:text-gray-100]:text-emerald-50 [&_.text-gray-600 dark:text-gray-400]:text-emerald-200/60 [&_.border-gray-200 dark:border-gray-700]:border-white/10">
+            <div className="[&_.bg-white dark:bg-emerald-950/40]:bg-black/40 [&_.bg-white dark:bg-emerald-950/40]:border-white/10 [&_.text-gray-900 dark:text-emerald-50]:text-emerald-50 [&_.text-gray-600 dark:text-emerald-200/60]:text-emerald-200/60 [&_.border-gray-200 dark:border-emerald-800/50]:border-white/10">
               <SugarCurveChart currentGL={combinedTotals.glycemicLoad} />
             </div>
             
@@ -270,4 +270,5 @@ export default function RamadanPlanner({ foods }: RamadanPlannerProps) {
     </div>
   );
 }
+
 

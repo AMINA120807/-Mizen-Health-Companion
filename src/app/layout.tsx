@@ -5,7 +5,6 @@ import { LanguageProvider } from "../contexts/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { ThemeProvider } from "../components/ThemeProvider";
-import { ThemeToggle } from "../components/ThemeToggle";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -28,14 +27,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
       <body className="font-sans min-h-screen">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           <LanguageProvider>
-            <main className="max-w-md mx-auto glass min-h-screen shadow-2xl border-x border-gray-100 dark:border-gray-800 flex flex-col">
-              <header className="p-4 flex justify-between items-center border-b border-gray-100 dark:border-white/10">
-                <ThemeToggle />
+            <main className="max-w-md mx-auto glass min-h-screen shadow-2xl border-x border-emerald-900/40 flex flex-col relative overflow-hidden">
+              {/* Top ambient glow for whole app */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-40 bg-emerald-500/10 blur-[60px] pointer-events-none z-0"></div>
+              
+              <header className="p-4 flex justify-end items-center border-b border-emerald-900/40 relative z-10">
                 <LanguageSwitcher />
             </header>
-            <div className="p-4 flex-1">
+            <div className="p-4 flex-1 relative z-10">
               <ErrorBoundary>
                 {children}
               </ErrorBoundary>
@@ -47,5 +48,6 @@ export default function RootLayout({
     </html>
   );
 }
+
 
 

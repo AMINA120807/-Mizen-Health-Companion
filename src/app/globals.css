@@ -30,27 +30,28 @@
   }
 
   .dark {
-    --background: 222.2 47.4% 11.2%;
-    --foreground: 210 40% 98%;
+    /* Emerald / Black Theme based on Ramadan Planner */
+    --background: 147 39% 7%; /* #0b1912 */
+    --foreground: 152 76% 96%; /* emerald-50 */
 
-    --primary: 154 50% 46%; /* Slightly brighter green for dark mode */
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 141 73% 42%; /* emerald-500 */
+    --primary-foreground: 147 39% 7%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 147 30% 12%; 
+    --secondary-foreground: 152 76% 96%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 147 30% 12%;
+    --muted-foreground: 152 50% 80%; /* emerald-200 */
 
-    --accent: 43 96% 56%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 141 73% 42%;
+    --accent-foreground: 147 39% 7%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 152 76% 96%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 154 50% 46%;
+    --border: 147 50% 15%; /* emerald-900/50 */
+    --input: 147 50% 15%;
+    --ring: 141 73% 42%;
   }
 
   * {
@@ -60,26 +61,21 @@
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background-image: radial-gradient(at 0% 0%, hsla(154, 50%, 86%, 1) 0, transparent 50%), radial-gradient(at 100% 100%, hsla(43, 96%, 86%, 1) 0, transparent 50%);
-    background-attachment: fixed;
-  }
-
-  .dark body {
-    background-image: radial-gradient(at 0% 0%, hsla(154, 50%, 15%, 1) 0, transparent 50%), radial-gradient(at 100% 100%, hsla(43, 96%, 15%, 1) 0, transparent 50%);
+    background-color: #0b1912;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/60 dark:bg-black/60 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_32px_rgb(0,0,0,0.4)];
+    @apply bg-[#0b1912]/80 backdrop-blur-xl border border-emerald-900/40 shadow-[0_8px_32px_rgba(0,0,0,0.4)];
   }
   
   .glass-panel {
-    @apply bg-white/80 dark:bg-black/80 backdrop-blur-md border border-white/50 dark:border-white/10 shadow-sm rounded-2xl;
+    @apply bg-[#0d2a1b]/80 backdrop-blur-md border border-emerald-900/50 shadow-lg rounded-2xl relative overflow-hidden;
   }
   
   .glass-button {
-    @apply bg-white/50 dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 backdrop-blur-sm border border-white/50 dark:border-white/10 shadow-sm transition-all duration-300;
+    @apply bg-emerald-950/40 hover:bg-emerald-900/60 backdrop-blur-sm border border-emerald-900/50 shadow-sm transition-all duration-300;
   }
   
   .text-balance {
