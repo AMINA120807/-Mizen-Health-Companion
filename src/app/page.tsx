@@ -15,6 +15,7 @@ import { useTranslation } from '../contexts/LanguageContext';
 export default function Home() {
   const [foods, setFoods] = useState<FoodItem[]>([]);
   const [mode, setMode] = useState<'standard' | 'ramadan' | 'history' | 'recipe' | 'dietitians' | 'weekly' | 'tasks'>('standard');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
 
   const fetchFoods = useCallback(() => {
@@ -36,49 +37,61 @@ export default function Home() {
         <p className="text-gray-500 dark:text-emerald-200/60 font-medium">{t('app.subtitle')}</p>
       </div>
 
-      <div className="w-full pb-2 -mb-2 print-hide">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 glass-panel p-3 rounded-2xl mx-auto shadow-sm">
+      <div className="w-full pb-2 -mb-2 print-hide relative z-20">
+        <div className="flex justify-end mb-3">
           <button 
-            onClick={() => setMode('standard')}
-            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'standard' ? 'bg-white dark:bg-emerald-950/40 text-primary shadow-md transform -translate-y-0.5' : 'text-gray-500 dark:text-emerald-200/60 hover:text-gray-900 dark:text-emerald-50 hover:bg-white/50'}`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2.5 bg-black/40 hover:bg-emerald-900/40 border border-emerald-900/50 rounded-xl text-emerald-50 flex items-center gap-2 transition-colors shadow-sm"
           >
-            {t('nav.dailyMeal')}
+            <span className="font-bold text-sm uppercase tracking-wider text-emerald-200/80 mr-1">Menu</span>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
+            </svg>
+          </button>
+        </div>
+
+        <div className={`flex flex-col gap-2 glass-panel mx-auto shadow-sm overflow-hidden transition-all duration-500 ease-in-out ${isMenuOpen ? 'max-h-[800px] opacity-100 p-3 mb-6' : 'max-h-0 opacity-0 p-0 border-0'}`}>
+          <button 
+            onClick={() => { setMode('standard'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'standard' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+          >
+            <span className="text-xl">🍽️</span> {t('nav.dailyMeal')}
           </button>
           <button 
-            onClick={() => setMode('tasks')}
-            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'tasks' ? 'bg-white dark:bg-emerald-950/40 text-blue-500 shadow-md transform -translate-y-0.5' : 'text-gray-500 dark:text-emerald-200/60 hover:text-gray-900 dark:text-emerald-50 hover:bg-white/50'}`}
+            onClick={() => { setMode('tasks'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'tasks' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
-            {t('nav.tasks')}
+            <span className="text-xl">✅</span> {t('nav.tasks')}
           </button>
           <button 
-            onClick={() => setMode('weekly')}
-            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'weekly' ? 'bg-white dark:bg-emerald-950/40 text-purple-600 shadow-md transform -translate-y-0.5' : 'text-gray-500 dark:text-emerald-200/60 hover:text-gray-900 dark:text-emerald-50 hover:bg-white/50'}`}
+            onClick={() => { setMode('weekly'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'weekly' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
-            {t('nav.weekly')}
+            <span className="text-xl">📅</span> {t('nav.weekly')}
           </button>
           <button 
-            onClick={() => setMode('ramadan')}
-            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'ramadan' ? 'bg-white dark:bg-emerald-950/40 text-[#f57f17] shadow-md transform -translate-y-0.5' : 'text-gray-500 dark:text-emerald-200/60 hover:text-gray-900 dark:text-emerald-50 hover:bg-white/50'}`}
+            onClick={() => { setMode('ramadan'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'ramadan' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-[#f57f17] border-l-4 border-[#f57f17]' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
-            {t('nav.ramadanMode')}
+            <span className="text-xl">🌙</span> {t('nav.ramadanMode')}
           </button>
           <button 
-            onClick={() => setMode('history')}
-            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'history' ? 'bg-white dark:bg-emerald-950/40 text-gray-900 dark:text-emerald-50 shadow-md transform -translate-y-0.5' : 'text-gray-500 dark:text-emerald-200/60 hover:text-gray-900 dark:text-emerald-50 hover:bg-white/50'}`}
+            onClick={() => { setMode('history'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'history' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
-            {t('nav.history')}
+            <span className="text-xl">📊</span> {t('nav.history')}
           </button>
           <button 
-            onClick={() => setMode('recipe')}
-            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'recipe' ? 'bg-white dark:bg-emerald-950/40 text-green-600 shadow-md transform -translate-y-0.5' : 'text-gray-500 dark:text-emerald-200/60 hover:text-gray-900 dark:text-emerald-50 hover:bg-white/50'}`}
+            onClick={() => { setMode('recipe'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'recipe' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
-            {t('nav.createRecipe')}
+            <span className="text-xl">🍳</span> {t('nav.createRecipe')}
           </button>
           <button 
-            onClick={() => setMode('dietitians')}
-            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'dietitians' ? 'bg-white dark:bg-emerald-950/40 text-blue-600 shadow-md transform -translate-y-0.5' : 'text-gray-500 dark:text-emerald-200/60 hover:text-gray-900 dark:text-emerald-50 hover:bg-white/50'}`}
+            onClick={() => { setMode('dietitians'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'dietitians' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
-            {t('nav.dietitians')}
+            <span className="text-xl">👨‍⚕️</span> {t('nav.dietitians')}
           </button>
         </div>
       </div>
