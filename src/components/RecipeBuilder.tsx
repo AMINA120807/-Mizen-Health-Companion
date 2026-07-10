@@ -121,13 +121,13 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
   return (
     <div className="w-full glass rounded-2xl p-6 transition-all fade-in">
       <h2 className="font-heading text-2xl font-bold mb-6 text-primary tracking-tight">
-        {t('recipeBuilder.title', 'Create Custom Recipe')}
+        {t('recipeBuilder.title')}
       </h2>
 
       {/* Step 1: Add Ingredients */}
       <div className="mb-8">
         <label className="block text-sm font-semibold text-gray-700 mb-2">
-          {t('recipeBuilder.searchIngredient', 'Search & Add Ingredients')}
+          {t('recipeBuilder.searchIngredient')}
         </label>
         <div className="relative">
           <input
@@ -159,7 +159,7 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
       {ingredients.length > 0 && (
         <div className="mb-8 space-y-3">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            {t('recipeBuilder.ingredientsList', 'Ingredients (Cooked Weight)')}
+            {t('recipeBuilder.ingredientsList')}
           </label>
           {ingredients.map((item, index) => (
             <div key={index} className="flex items-center gap-3 bg-white p-3 rounded-xl border border-gray-100 shadow-sm">
@@ -186,7 +186,7 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
             </div>
           ))}
           <div className="text-right text-sm text-gray-600 font-medium pt-2 border-t border-gray-100">
-            {t('recipeBuilder.totalWeight', 'Total Weight:')} {totalWeight}g
+            {t('recipeBuilder.totalWeight')} {totalWeight}g
           </div>
         </div>
       )}
@@ -196,7 +196,7 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
         <div className="space-y-4 mb-8 bg-primary/5 p-5 rounded-xl border border-primary/10">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              {t('recipeBuilder.recipeName', 'Recipe Name')}
+              {t('recipeBuilder.recipeName')}
             </label>
             <input
               type="text"
@@ -209,7 +209,7 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
           </div>
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              {t('recipeBuilder.portionSize', 'Typical Portion Size (g)')}
+              {t('recipeBuilder.portionSize')}
             </label>
             <input
               type="number"
@@ -228,7 +228,7 @@ export default function RecipeBuilder({ foods, onRecipeSaved }: RecipeBuilderPro
         disabled={!recipeName.trim() || ingredients.length === 0 || !portionGrams || totalWeight === 0}
         className="w-full bg-primary text-primary-foreground font-bold py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:pointer-events-none"
       >
-        {t('recipeBuilder.saveButton', 'Save Custom Recipe')}
+        {t('recipeBuilder.saveButton')}
       </button>
     </div>
   );
