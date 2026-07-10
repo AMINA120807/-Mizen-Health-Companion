@@ -3,11 +3,19 @@
 import { useState } from 'react';
 import { useTranslation } from '../contexts/LanguageContext';
 
+interface Recipe {
+  title: string;
+  desc: string;
+  calories: number;
+  time: string;
+  ingredients: string[];
+}
+
 export default function AIChef() {
   const { t } = useTranslation();
   const [ingredients, setIngredients] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
-  const [recipe, setRecipe] = useState<any>(null);
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
 
   const mockRecipes = [
     {
@@ -104,7 +112,7 @@ export default function AIChef() {
           
           <h4 className="font-bold text-gray-800 dark:text-emerald-100 mb-2">Ingrédients :</h4>
           <ul className="list-disc pl-5 text-gray-700 dark:text-emerald-200/80 space-y-1">
-            {recipe.ingredients.map((ing: string, i: number) => (
+            {recipe.ingredients.map((ing, i) => (
               <li key={i}>{ing}</li>
             ))}
           </ul>

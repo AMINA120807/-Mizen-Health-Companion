@@ -193,15 +193,12 @@ const translations: Translations = {
   "shopping.empty": { en: "Add meals to your week to generate a list.", fr: "Ajoutez des repas à votre semaine pour générer une liste.", ar: "أضف وجبات إلى أسبوعك لإنشاء قائمة.", dar: "زيد ماكلة للسمانة باش نوجدو القائمة." },
   
   // Community Feed (Phase 2)
-  "nav.community": { en: "Community", fr: "Communauté", ar: "المجتمع", dar: "المجتمع" },
   "community.title": { en: "Mizen Community", fr: "Communauté Mizen", ar: "مجتمع ميزان", dar: "مجتمع ميزان" },
   "community.subtitle": { en: "Share and discover healthy meals", fr: "Partagez et découvrez des repas sains", ar: "شارك واكتشف وجبات صحية", dar: "شارك واكتشف ماكلة صحية" },
   "community.shareBtn": { en: "Share My Meal", fr: "Partager Mon Repas", ar: "شارك وجبتي", dar: "شارك وجبتي" },
   "community.likes": { en: "Likes", fr: "J'aime", ar: "إعجابات", dar: "جامات" },
 
   // Scanner & AI Chef (Phase 3)
-  "nav.scanner": { en: "Barcode Scanner", fr: "Scanner Code-barres", ar: "ماسح الباركود", dar: "سكانير" },
-  "nav.chef": { en: "AI Chef", fr: "Chef IA", ar: "الشيف الذكي", dar: "الشاف الذكي" },
   "scanner.title": { en: "Product Scanner", fr: "Scanner de Produits", ar: "ماسح المنتجات", dar: "سكانير المنتجات" },
   "scanner.subtitle": { en: "Scan a product to check its nutritional value", fr: "Scannez un produit pour voir sa valeur nutritionnelle", ar: "امسح منتج للتحقق من قيمته الغذائية", dar: "سكاني منتج باش تشوف واش فيه" },
   "scanner.scanBtn": { en: "Simulate Scan", fr: "Simuler un Scan", ar: "محاكاة المسح", dar: "سيي تسكاني" },

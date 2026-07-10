@@ -3,14 +3,22 @@
 import { useState } from 'react';
 import { useTranslation } from '../contexts/LanguageContext';
 
+interface Product {
+  name: string;
+  score: string;
+  calories: number;
+  sugar: number;
+  warning: string | null;
+}
+
 export default function BarcodeScanner() {
   const { t } = useTranslation();
   const [barcode, setBarcode] = useState("");
   const [isScanning, setIsScanning] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<Product | null>(null);
 
   // Mock product database for Algerian products
-  const mockDatabase: Record<string, any> = {
+  const mockDatabase: Record<string, Product> = {
     "12345": { name: "Jus d'Orange N'gaous", score: "C", calories: 45, sugar: 10, warning: "High Sugar" },
     "54321": { name: "Yaourt Nature Soummam", score: "A", calories: 55, sugar: 4, warning: null },
     "99999": { name: "Gaufrettes BIMO", score: "E", calories: 480, sugar: 35, warning: "Very High Sugar & Fat" }
