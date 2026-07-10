@@ -10,12 +10,14 @@ import RecipeBuilder from '../components/RecipeBuilder';
 import DietitianDirectory from '../components/DietitianDirectory';
 import WeeklyPlanner from '../components/WeeklyPlanner';
 import DailyTasks from '../components/DailyTasks';
+import InstallModal from '../components/InstallModal';
 import { useTranslation } from '../contexts/LanguageContext';
 
 export default function Home() {
   const [foods, setFoods] = useState<FoodItem[]>([]);
   const [mode, setMode] = useState<'standard' | 'ramadan' | 'history' | 'recipe' | 'dietitians' | 'weekly' | 'tasks'>('standard');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showInstallModal, setShowInstallModal] = useState(false);
   const { t } = useTranslation();
 
   const fetchFoods = useCallback(() => {
@@ -93,6 +95,15 @@ export default function Home() {
           >
             <span className="text-xl">👨‍⚕️</span> {t('nav.dietitians')}
           </button>
+          
+          <div className="h-px w-full bg-emerald-900/50 my-1"></div>
+          
+          <button 
+            onClick={() => { setShowInstallModal(true); setIsMenuOpen(false); }}
+            className="py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent"
+          >
+            <span className="text-xl">📱</span> Installer l'Application
+          </button>
         </div>
       </div>
 
@@ -111,6 +122,8 @@ export default function Home() {
           }} 
         />
       )}
+
+      {showInstallModal && <InstallModal onClose={() => setShowInstallModal(false)} />}
     </div>
   );
 }
