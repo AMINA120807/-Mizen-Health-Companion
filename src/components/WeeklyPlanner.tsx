@@ -25,13 +25,13 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
   );
 
   const daysOfWeek = [
-    t('weekly.monday', 'Monday'),
-    t('weekly.tuesday', 'Tuesday'),
-    t('weekly.wednesday', 'Wednesday'),
-    t('weekly.thursday', 'Thursday'),
-    t('weekly.friday', 'Friday'),
-    t('weekly.saturday', 'Saturday'),
-    t('weekly.sunday', 'Sunday')
+    t('weekly.monday'),
+    t('weekly.tuesday'),
+    t('weekly.wednesday'),
+    t('weekly.thursday'),
+    t('weekly.friday'),
+    t('weekly.saturday'),
+    t('weekly.sunday')
   ];
 
   const fuse = useMemo(() => {
@@ -72,10 +72,10 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
       <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4 print-hide">
         <div>
           <h2 className="font-heading text-2xl font-bold text-primary tracking-tight">
-            {t('weekly.title', 'Weekly Meal Plan')}
+            {t('weekly.title')}
           </h2>
           <p className="text-gray-500 text-sm">
-            {t('weekly.subtitle', 'Plan your meals for the week and print them.')}
+            {t('weekly.subtitle')}
           </p>
         </div>
         <button
@@ -85,13 +85,13 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
           </svg>
-          {t('weekly.print', 'Print / Save PDF')}
+          {t('weekly.print')}
         </button>
       </div>
 
       {/* Print-only title (hidden on screen) */}
       <div className="hidden print-show mb-6 text-center">
-        <h1 className="font-heading text-3xl font-extrabold text-black">{t('weekly.printTitle', 'My Weekly Meal Plan')}</h1>
+        <h1 className="font-heading text-3xl font-extrabold text-black">{t('weekly.printTitle')}</h1>
       </div>
 
       {/* Search Modal (Only visible when adding a meal) */}
@@ -105,7 +105,7 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
               ✕
             </button>
             <h3 className="font-bold text-lg mb-4 text-gray-900">
-              {t('weekly.addTo', 'Add Meal to')} {daysOfWeek[activeDay]}
+              {t('weekly.addTo')} {daysOfWeek[activeDay]}
             </h3>
             
             <div className="relative mb-4">
@@ -150,7 +150,7 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
               <button 
                 onClick={() => setActiveDay(dayPlan.dayId)}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors print-hide"
-                title={t('weekly.addMeal', 'Add Meal')}
+                title={t('weekly.addMeal')}
               >
                 +
               </button>
@@ -160,7 +160,7 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
             <div className="p-4 flex-1 flex flex-col gap-3 min-h-[120px]">
               {dayPlan.meals.length === 0 ? (
                 <div className="text-sm text-gray-400 italic text-center my-auto print-hide">
-                  {t('weekly.emptyDay', 'No meals planned yet.')}
+                  {t('weekly.emptyDay')}
                 </div>
               ) : (
                 dayPlan.meals.map((meal, index) => (
