@@ -17,30 +17,6 @@ export default function AIChef() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [recipe, setRecipe] = useState<Recipe | null>(null);
 
-  const mockRecipes = [
-    {
-      title: "Tajine Zitoun Allégé",
-      desc: "Un tajine riche en protéines et pauvre en matières grasses.",
-      calories: 320,
-      time: "45 min",
-      ingredients: ["Poulet", "Olives vertes", "Carottes", "Oignon", "Curcuma"]
-    },
-    {
-      title: "Salade Variée Énergétique",
-      desc: "Une salade pleine de fibres parfaite pour le déjeuner.",
-      calories: 210,
-      time: "15 min",
-      ingredients: ["Tomates", "Laitue", "Concombre", "Œufs", "Huile d'olive"]
-    },
-    {
-      title: "Chorba Frik Saine",
-      desc: "Soupe traditionnelle avec moins de gras, riche en blé concassé.",
-      calories: 280,
-      time: "60 min",
-      ingredients: ["Viande hachée maigre", "Frik", "Céleri", "Tomates", "Coriandre"]
-    }
-  ];
-
   const handleGenerate = () => {
     if (!ingredients.trim()) return;
     setIsGenerating(true);
@@ -49,11 +25,47 @@ export default function AIChef() {
     // Simulate AI thinking
     setTimeout(() => {
       setIsGenerating(false);
-      // Pick a random recipe for the demo
-      const randomRecipe = mockRecipes[Math.floor(Math.random() * mockRecipes.length)];
-      setRecipe(randomRecipe);
+      
+      // Parse user ingredients
+      const userIngredientsList = ingredients
+        .split(/[,;\n]/)
+        .map(i => i.trim())
+        .filter(i => i.length > 0);
+        
+      if (userIngredientsList.length === 0) {
+          userIngredientsList.push("Ingrédient mystère");
+      }
+
+      // Base staples to add realism
+      const staples = ["Huile d'olive", "Ail", "Oignon", "Sel et Poivre", "Épices au choix"];
+      const randomStaples = staples.sort(() => 0.5 - Math.random()).slice(0, 2);
+      
+      const finalIngredients = [...userIngredientsList, ...randomStaples];
+      
+      // Generate a dynamic title based on the first 1-2 ingredients
+      const mainIngredient = userIngredientsList[0];
+      const secondIngredient = userIngredientsList.length > 1 ? userIngredientsList[1] : "";
+      
+      const cookingMethods = ["Sauté", "Plat Mijoté", "Salade Tiède", "Gratin express", "Poêlée", "Tajine Revisité"];
+      const method = cookingMethods[Math.floor(Math.random() * cookingMethods.length)];
+      
+      const dynamicTitle = secondIngredient 
+        ? `${method} de ${mainIngredient} et ${secondIngredient}`
+        : `${method} à base de ${mainIngredient}`;
+
+      const generatedRecipe: Recipe = {
+        title: dynamicTitle,
+        desc: "Une recette unique créée spécialement avec vos ingrédients ! Parfaitement équilibrée et rapide à préparer.",
+        calories: Math.floor(Math.random() * 300) + 200, // Random between 200-500
+        time: `${Math.floor(Math.random() * 30) + 15} min`, // 15-45 mins
+        ingredients: finalIngredients
+      };
+      
+      setRecipe(generatedRecipe);
     }, 2000);
   };
+
+
 
   return (
     <div className="w-full max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
