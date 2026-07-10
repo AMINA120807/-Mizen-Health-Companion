@@ -4,29 +4,29 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
+    --background: 210 40% 98%;
     --foreground: 222.2 47.4% 11.2%;
 
-    --primary: 154 50% 36%; /* Algerian Green */
+    --primary: 154 50% 36%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 24 9.8% 10%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 214.3 31.8% 91.4%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 43 96% 56%; /* Gold/Orange Accent */
+    --accent: 43 96% 56%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 100% 50%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 154 50% 36%;
     
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 
   * {
@@ -34,14 +34,24 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: radial-gradient(at 0% 0%, hsla(154, 50%, 86%, 1) 0, transparent 50%), radial-gradient(at 100% 100%, hsla(43, 96%, 86%, 1) 0, transparent 50%);
+    background-attachment: fixed;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)];
+    @apply bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgb(0,0,0,0.04)];
+  }
+  
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-md border border-white/50 shadow-sm rounded-2xl;
+  }
+  
+  .glass-button {
+    @apply bg-white/50 hover:bg-white/80 backdrop-blur-sm border border-white/50 shadow-sm transition-all duration-300;
   }
   
   .text-balance {
@@ -50,13 +60,31 @@
   
   /* Micro-animations */
   .hover-lift {
-    @apply transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg;
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg hover:border-primary/30;
   }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media print {
   body {
-    background-color: white !important;
+    background: white !important;
     color: black !important;
   }
   
@@ -77,11 +105,12 @@
     box-shadow: none !important;
     background: transparent !important;
     padding: 0 !important;
+    border: none !important;
   }
 
   .print-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important; /* 2 columns on print looks good for 7 days */
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px !important;
     page-break-inside: avoid;
   }
@@ -91,6 +120,7 @@
     box-shadow: none !important;
     border-radius: 4px !important;
     page-break-inside: avoid;
+    background: transparent !important;
   }
 
   .print-card-header {
@@ -103,4 +133,3 @@
     display: flex !important;
   }
 }
-

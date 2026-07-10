@@ -9,11 +9,12 @@ import HistoryTab from '../components/HistoryTab';
 import RecipeBuilder from '../components/RecipeBuilder';
 import DietitianDirectory from '../components/DietitianDirectory';
 import WeeklyPlanner from '../components/WeeklyPlanner';
+import DailyTasks from '../components/DailyTasks';
 import { useTranslation } from '../contexts/LanguageContext';
 
 export default function Home() {
   const [foods, setFoods] = useState<FoodItem[]>([]);
-  const [mode, setMode] = useState<'standard' | 'ramadan' | 'history' | 'recipe' | 'dietitians' | 'weekly'>('standard');
+  const [mode, setMode] = useState<'standard' | 'ramadan' | 'history' | 'recipe' | 'dietitians' | 'weekly' | 'tasks'>('standard');
   const { t } = useTranslation();
 
   const fetchFoods = useCallback(() => {
@@ -36,40 +37,46 @@ export default function Home() {
       </div>
 
       <div className="w-full overflow-x-auto pb-2 -mb-2 scrollbar-hide print-hide">
-        <div className="flex justify-start sm:justify-center bg-gray-100 p-1 rounded-xl min-w-max sm:min-w-0 sm:max-w-3xl mx-auto shadow-inner gap-1">
+        <div className="flex justify-start sm:justify-center glass-panel p-2 rounded-2xl min-w-max sm:min-w-0 sm:max-w-4xl mx-auto shadow-sm gap-2">
           <button 
             onClick={() => setMode('standard')}
-            className={`py-2 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all ${mode === 'standard' ? 'bg-white text-primary shadow' : 'text-gray-500 hover:text-gray-900'}`}
+            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'standard' ? 'bg-white text-primary shadow-md transform -translate-y-0.5' : 'text-gray-500 hover:text-gray-900 hover:bg-white/50'}`}
           >
             {t('nav.dailyMeal')}
           </button>
           <button 
+            onClick={() => setMode('tasks')}
+            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'tasks' ? 'bg-white text-blue-500 shadow-md transform -translate-y-0.5' : 'text-gray-500 hover:text-gray-900 hover:bg-white/50'}`}
+          >
+            {t('nav.tasks')}
+          </button>
+          <button 
             onClick={() => setMode('weekly')}
-            className={`py-2 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all ${mode === 'weekly' ? 'bg-white text-purple-600 shadow' : 'text-gray-500 hover:text-gray-900'}`}
+            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'weekly' ? 'bg-white text-purple-600 shadow-md transform -translate-y-0.5' : 'text-gray-500 hover:text-gray-900 hover:bg-white/50'}`}
           >
             {t('nav.weekly')}
           </button>
           <button 
             onClick={() => setMode('ramadan')}
-            className={`py-2 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all ${mode === 'ramadan' ? 'bg-white text-[#f57f17] shadow' : 'text-gray-500 hover:text-gray-900'}`}
+            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'ramadan' ? 'bg-white text-[#f57f17] shadow-md transform -translate-y-0.5' : 'text-gray-500 hover:text-gray-900 hover:bg-white/50'}`}
           >
             {t('nav.ramadanMode')}
           </button>
           <button 
             onClick={() => setMode('history')}
-            className={`py-2 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all ${mode === 'history' ? 'bg-white text-gray-900 shadow' : 'text-gray-500 hover:text-gray-900'}`}
+            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'history' ? 'bg-white text-gray-900 shadow-md transform -translate-y-0.5' : 'text-gray-500 hover:text-gray-900 hover:bg-white/50'}`}
           >
             {t('nav.history')}
           </button>
           <button 
             onClick={() => setMode('recipe')}
-            className={`py-2 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all ${mode === 'recipe' ? 'bg-white text-green-600 shadow' : 'text-gray-500 hover:text-gray-900'}`}
+            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'recipe' ? 'bg-white text-green-600 shadow-md transform -translate-y-0.5' : 'text-gray-500 hover:text-gray-900 hover:bg-white/50'}`}
           >
             {t('nav.createRecipe')}
           </button>
           <button 
             onClick={() => setMode('dietitians')}
-            className={`py-2 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all ${mode === 'dietitians' ? 'bg-white text-blue-600 shadow' : 'text-gray-500 hover:text-gray-900'}`}
+            className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'dietitians' ? 'bg-white text-blue-600 shadow-md transform -translate-y-0.5' : 'text-gray-500 hover:text-gray-900 hover:bg-white/50'}`}
           >
             {t('nav.dietitians')}
           </button>
@@ -77,6 +84,7 @@ export default function Home() {
       </div>
 
       {mode === 'standard' && <MealBuilder foods={foods} />}
+      {mode === 'tasks' && <DailyTasks />}
       {mode === 'weekly' && <WeeklyPlanner foods={foods} />}
       {mode === 'ramadan' && <RamadanPlanner foods={foods} />}
       {mode === 'history' && <HistoryTab />}

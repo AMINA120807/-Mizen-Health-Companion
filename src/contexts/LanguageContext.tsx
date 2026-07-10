@@ -26,6 +26,7 @@ const translations: Translations = {
   "nav.createRecipe": { en: "Create Recipe", fr: "Créer une Recette", ar: "إنشاء وصفة", dar: "صنع وصفة" },
   "nav.dietitians": { en: "Experts", fr: "Experts", ar: "المختصين", dar: "المختصين" },
   "nav.weekly": { en: "Weekly Plan", fr: "Plan Hebdo", ar: "خطة أسبوعية", dar: "خطة سمانة" },
+  "nav.tasks": { en: "Daily Goals", fr: "Objectifs", ar: "أهداف يومية", dar: "أهداف يومية" },
 
   // Search
   "search.placeholder": { en: "Search for a food (e.g. Couscous)...", fr: "Rechercher un aliment (ex. Couscous)...", ar: "ابحث عن طعام (مثل كسكس)...", dar: "حوس على ماكلة (مثلا كسكس)..." },
