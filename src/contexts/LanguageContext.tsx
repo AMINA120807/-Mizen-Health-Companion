@@ -27,6 +27,7 @@ const translations: Translations = {
   "nav.dietitians": { en: "Experts", fr: "Experts", ar: "المختصين", dar: "المختصين" },
   "nav.weekly": { en: "Weekly Plan", fr: "Plan Hebdo", ar: "خطة أسبوعية", dar: "خطة سمانة" },
   "nav.tasks": { en: "Daily Goals", fr: "Objectifs", ar: "أهداف يومية", dar: "أهداف يومية" },
+  "nav.installApp": { en: "Install App", fr: "Installer l'Application", ar: "تثبيت التطبيق", dar: "تثبيت التطبيق" },
 
   // Search
   "search.placeholder": { en: "Search for a food (e.g. Couscous)...", fr: "Rechercher un aliment (ex. Couscous)...", ar: "ابحث عن طعام (مثل كسكس)...", dar: "حوس على ماكلة (مثلا كسكس)..." },
@@ -146,7 +147,26 @@ const translations: Translations = {
   "weekly.thursday": { en: "Thursday", fr: "Jeudi", ar: "الخميس", dar: "الخميس" },
   "weekly.friday": { en: "Friday", fr: "Vendredi", ar: "الجمعة", dar: "الجمعة" },
   "weekly.saturday": { en: "Saturday", fr: "Samedi", ar: "السبت", dar: "السبت" },
-  "weekly.sunday": { en: "Sunday", fr: "Dimanche", ar: "الأحد", dar: "الأحد" }
+  "weekly.sunday": { en: "Sunday", fr: "Dimanche", ar: "الأحد", dar: "الأحد" },
+  
+  // Install Modal
+  "install.title": { en: "Install Mizen", fr: "Installer Mizen", ar: "تثبيت ميزان", dar: "تثبيت ميزان" },
+  "install.desc": { en: "Add Mizen to your home screen to use it like a real app, even offline!", fr: "Ajoutez Mizen à votre écran d'accueil pour l'utiliser comme une vraie application, même hors-ligne !", ar: "أضف ميزان إلى شاشتك الرئيسية لاستخدامه كتطبيق حقيقي، حتى بدون إنترنت!", dar: "زيد ميزان في شاشتك الرئيسية باش تستعملو كتطبيق حقيقي، حتى بلا إنترنت!" },
+  "install.iosStep1": { en: "Tap the share button below", fr: "Appuyez sur le bouton de partage en bas", ar: "اضغط على زر المشاركة أدناه", dar: "اضغط على زر المشاركة لتحت" },
+  "install.iosStep2": { en: "Scroll down and select", fr: "Faites défiler et sélectionnez", ar: "قم بالتمرير للأسفل وحدد", dar: "اهبط لتحت وخير" },
+  "install.iosStep2Bold": { en: "\"Add to Home Screen\"", fr: "\"Sur l'écran d'accueil\"", ar: "\"إضافة إلى الشاشة الرئيسية\"", dar: "\"إضافة إلى الشاشة الرئيسية\"" },
+  "install.iosStep3": { en: "Tap", fr: "Appuyez sur", ar: "اضغط على", dar: "اضغط على" },
+  "install.iosStep3Bold": { en: "\"Add\"", fr: "\"Ajouter\"", ar: "\"إضافة\"", dar: "\"إضافة\"" },
+  "install.iosStep3End": { en: "in the top right", fr: "en haut à droite", ar: "في أعلى اليمين", dar: "الفوق على اليمين" },
+  "install.androidStep1": { en: "Tap the menu (3 dots) in the top right", fr: "Appuyez sur le menu (les 3 points) en haut à droite", ar: "اضغط على القائمة (3 نقاط) في أعلى اليمين", dar: "اضغط على القائمة (3 نقاط) الفوق على اليمين" },
+  "install.androidStep2": { en: "Select", fr: "Sélectionnez", ar: "حدد", dar: "خير" },
+  "install.androidStep2Bold1": { en: "\"Add to Home screen\"", fr: "\"Ajouter à l'écran d'accueil\"", ar: "\"إضافة إلى الشاشة الرئيسية\"", dar: "\"إضافة إلى الشاشة الرئيسية\"" },
+  "install.androidStep2Or": { en: "or", fr: "ou", ar: "أو", dar: "ولا" },
+  "install.androidStep2Bold2": { en: "\"Install app\"", fr: "\"Installer l'application\"", ar: "\"تثبيت التطبيق\"", dar: "\"تثبيت التطبيق\"" },
+  "install.androidStep3": { en: "Confirm by tapping", fr: "Confirmez en appuyant sur", ar: "قم بالتأكيد بالضغط على", dar: "أكد بالضغط على" },
+  "install.androidStep3Bold1": { en: "\"Add\"", fr: "\"Ajouter\"", ar: "\"إضافة\"", dar: "\"إضافة\"" },
+  "install.androidStep3Bold2": { en: "\"Install\"", fr: "\"Installer\"", ar: "\"تثبيت\"", dar: "\"تثبيت\"" },
+  "install.gotIt": { en: "Got it!", fr: "J'ai compris !", ar: "فهمت!", dar: "فهمت!" }
 };
 
 interface LanguageContextType {

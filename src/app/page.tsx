@@ -102,7 +102,7 @@ export default function Home() {
             onClick={() => { setShowInstallModal(true); setIsMenuOpen(false); }}
             className="py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent"
           >
-            <span className="text-xl">📱</span> Installer l'Application
+            <span className="text-xl">📱</span> {t('nav.installApp')}
           </button>
         </div>
       </div>

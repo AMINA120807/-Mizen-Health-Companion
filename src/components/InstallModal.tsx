@@ -30,9 +30,9 @@ export default function InstallModal({ onClose }: InstallModalProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
             </svg>
           </div>
-          <h2 className="text-2xl font-bold mb-2">Installer Mizen</h2>
+          <h2 className="text-2xl font-bold mb-2">{t('install.title')}</h2>
           <p className="text-emerald-200/70 text-sm">
-            Ajoutez Mizen à votre écran d'accueil pour l'utiliser comme une vraie application, même hors-ligne !
+            {t('install.desc')}
           </p>
         </div>
 
@@ -43,9 +43,9 @@ export default function InstallModal({ onClose }: InstallModalProps) {
               <span className="text-xl">🍎</span> iPhone & iPad (Safari)
             </h3>
             <ol className="text-sm text-emerald-100/80 space-y-2 list-decimal pl-4">
-              <li>Appuyez sur le bouton de partage en bas <span className="inline-block border border-emerald-500/30 rounded px-1 bg-black/20">⎙</span></li>
-              <li>Faites défiler et sélectionnez <strong className="text-emerald-400">"Sur l'écran d'accueil"</strong></li>
-              <li>Appuyez sur <strong className="text-emerald-400">"Ajouter"</strong> en haut à droite</li>
+              <li>{t('install.iosStep1')} <span className="inline-block border border-emerald-500/30 rounded px-1 bg-black/20">⎙</span></li>
+              <li>{t('install.iosStep2')} <strong className="text-emerald-400">{t('install.iosStep2Bold')}</strong></li>
+              <li>{t('install.iosStep3')} <strong className="text-emerald-400">{t('install.iosStep3Bold')}</strong> {t('install.iosStep3End')}</li>
             </ol>
           </div>
 
@@ -55,9 +55,9 @@ export default function InstallModal({ onClose }: InstallModalProps) {
               <span className="text-xl">🤖</span> Android (Chrome)
             </h3>
             <ol className="text-sm text-emerald-100/80 space-y-2 list-decimal pl-4">
-              <li>Appuyez sur le menu (les 3 points <span className="inline-block font-bold px-1">⋮</span>) en haut à droite</li>
-              <li>Sélectionnez <strong className="text-emerald-400">"Ajouter à l'écran d'accueil"</strong> ou <strong>"Installer l'application"</strong></li>
-              <li>Confirmez en appuyant sur <strong className="text-emerald-400">"Ajouter"</strong> ou <strong>"Installer"</strong></li>
+              <li>{t('install.androidStep1')}</li>
+              <li>{t('install.androidStep2')} <strong className="text-emerald-400">{t('install.androidStep2Bold1')}</strong> {t('install.androidStep2Or')} <strong>{t('install.androidStep2Bold2')}</strong></li>
+              <li>{t('install.androidStep3')} <strong className="text-emerald-400">{t('install.androidStep3Bold1')}</strong> {t('install.androidStep2Or')} <strong>{t('install.androidStep3Bold2')}</strong></li>
             </ol>
           </div>
         </div>
@@ -66,7 +66,7 @@ export default function InstallModal({ onClose }: InstallModalProps) {
           onClick={onClose}
           className="mt-6 w-full py-3 bg-gradient-to-r from-emerald-600 to-green-500 text-white font-bold rounded-xl hover:from-emerald-500 hover:to-green-400 transition-all shadow-lg shadow-emerald-900/50"
         >
-          J'ai compris !
+          {t('install.gotIt')}
         </button>
       </div>
     </div>
