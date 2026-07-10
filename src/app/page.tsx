@@ -36,8 +36,8 @@ export default function Home() {
         <p className="text-gray-500 dark:text-emerald-200/60 font-medium">{t('app.subtitle')}</p>
       </div>
 
-      <div className="w-full overflow-x-auto pb-2 -mb-2 scrollbar-hide print-hide">
-        <div className="flex justify-start sm:justify-center glass-panel p-2 rounded-2xl min-w-max sm:min-w-0 sm:max-w-4xl mx-auto shadow-sm gap-2">
+      <div className="w-full pb-2 -mb-2 print-hide">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 glass-panel p-3 rounded-2xl mx-auto shadow-sm">
           <button 
             onClick={() => setMode('standard')}
             className={`py-2 px-4 text-xs sm:text-sm font-bold rounded-xl transition-all ${mode === 'standard' ? 'bg-white dark:bg-emerald-950/40 text-primary shadow-md transform -translate-y-0.5' : 'text-gray-500 dark:text-emerald-200/60 hover:text-gray-900 dark:text-emerald-50 hover:bg-white/50'}`}
