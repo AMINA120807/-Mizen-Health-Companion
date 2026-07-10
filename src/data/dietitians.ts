@@ -6,7 +6,7 @@ export const mockDietitians: Dietitian[] = [
     name: "Dr. Amira Benali",
     title: "Médecin Nutritionniste",
     specialties: ["Diabète", "Perte de Poids", "Nutrition Sportive"],
-    wilaya: "Alger (16)",
+    wilaya: "16 - Alger",
     contact: {
       phone: "0555 12 34 56",
       email: "contact@amiranutrition.dz",
@@ -19,7 +19,7 @@ export const mockDietitians: Dietitian[] = [
     name: "Yacine Merah",
     title: "Diététicien Clinicien",
     specialties: ["Obésité", "Maladies Cardiovasculaires"],
-    wilaya: "Oran (31)",
+    wilaya: "31 - Oran",
     contact: {
       phone: "0770 98 76 54",
       instagram: "@yacine_diet",
@@ -31,7 +31,7 @@ export const mockDietitians: Dietitian[] = [
     name: "Amina Kaddour",
     title: "Experte en Rééquilibrage Alimentaire",
     specialties: ["Perte de Poids", "Femmes Enceintes"],
-    wilaya: "Constantine (25)",
+    wilaya: "25 - Constantine",
     contact: {
       phone: "0661 11 22 33",
       email: "amina.diet@gmail.com",
@@ -43,7 +43,7 @@ export const mockDietitians: Dietitian[] = [
     name: "Dr. Sofiane Touati",
     title: "Nutritionniste & Coach Sportif",
     specialties: ["Nutrition Sportive", "Prise de Masse"],
-    wilaya: "Sétif (19)",
+    wilaya: "19 - Sétif",
     contact: {
       instagram: "@coach_sofiane_dz",
       address: "Centre Ville, Sétif"
@@ -54,7 +54,7 @@ export const mockDietitians: Dietitian[] = [
     name: "Lamia Zerrouki",
     title: "Diététicienne Spécialisée",
     specialties: ["Diabète", "Intolérances Alimentaires"],
-    wilaya: "Alger (16)",
+    wilaya: "16 - Alger",
     contact: {
       phone: "0550 44 55 66",
       email: "lamia.z@nutrition.dz",
