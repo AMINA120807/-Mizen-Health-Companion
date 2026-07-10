@@ -180,7 +180,7 @@ export default function RamadanPlanner({ foods }: RamadanPlannerProps) {
   );
 
   return (
-    <div className="bg-[#0b1912] text-emerald-50 p-4 md:p-6 rounded-[2rem] shadow-2xl relative overflow-hidden font-sans max-w-lg mx-auto border border-emerald-900/50">
+    <div className="bg-[#0b1912] text-emerald-50 p-4 md:p-8 rounded-[2rem] shadow-2xl relative overflow-hidden font-sans w-full max-w-3xl mx-auto border border-emerald-900/50">
       
       {/* Top ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-emerald-500/20 blur-[50px] pointer-events-none"></div>

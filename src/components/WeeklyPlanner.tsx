@@ -97,7 +97,7 @@ export default function WeeklyPlanner({ foods }: WeeklyPlannerProps) {
       {/* Search Modal (Only visible when adding a meal) */}
       {activeDay !== null && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 print-hide">
-          <div className="bg-white dark:bg-emerald-950/40 rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
+          <div className="bg-white dark:bg-emerald-950/40 rounded-2xl w-full max-w-3xl p-6 md:p-8 shadow-2xl relative">
             <button 
               onClick={() => { setActiveDay(null); setQuery(""); }}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-emerald-200/60"
