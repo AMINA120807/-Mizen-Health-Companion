@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { FoodItem } from '../types/food';
 import { MealItem } from '../types/meal';
 import SearchEngine from './SearchEngine';
@@ -16,7 +16,49 @@ export default function RamadanPlanner({ foods }: RamadanPlannerProps) {
   const [suhoorItems, setSuhoorItems] = useState<MealItem[]>([]);
   const [iftarItems, setIftarItems] = useState<MealItem[]>([]);
   const [activeMeal, setActiveMeal] = useState<'suhoor' | 'iftar'>('iftar');
+  
+  // Spiritual tracking states
+  const [prayers, setPrayers] = useState({
+    fajr: false, dhuhr: false, asr: false, maghrib: false, isha: false
+  });
+  const [taraweeh, setTaraweeh] = useState(false);
+  const [quranPages, setQuranPages] = useState(0);
+  const [adhkar, setAdhkar] = useState({ morning: false, evening: false });
+  const [isSpiritualLoaded, setIsSpiritualLoaded] = useState(false);
+
   const { t, getFoodName } = useTranslation();
+
+  // Load Spiritual Data
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('mizen_spiritual');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        const today = new Date().toISOString().split('T')[0];
+        const lastUpdated = localStorage.getItem('mizen_spiritual_date');
+        
+        if (lastUpdated === today) {
+          if (parsed.prayers) setPrayers(parsed.prayers);
+          if (parsed.taraweeh !== undefined) setTaraweeh(parsed.taraweeh);
+          if (parsed.quranPages !== undefined) setQuranPages(parsed.quranPages);
+          if (parsed.adhkar) setAdhkar(parsed.adhkar);
+        }
+      }
+      setIsSpiritualLoaded(true);
+    } catch (e) {
+      console.error("Failed to load spiritual data");
+      setIsSpiritualLoaded(true);
+    }
+  }, []);
+
+  // Save Spiritual Data
+  useEffect(() => {
+    if (isSpiritualLoaded) {
+      const dataToSave = { prayers, taraweeh, quranPages, adhkar };
+      localStorage.setItem('mizen_spiritual', JSON.stringify(dataToSave));
+      localStorage.setItem('mizen_spiritual_date', new Date().toISOString().split('T')[0]);
+    }
+  }, [prayers, taraweeh, quranPages, adhkar, isSpiritualLoaded]);
 
   const suhoorTotals = useMemo(() => calculateTotals(suhoorItems), [suhoorItems]);
   const iftarTotals = useMemo(() => calculateTotals(iftarItems), [iftarItems]);
@@ -259,9 +301,80 @@ export default function RamadanPlanner({ foods }: RamadanPlannerProps) {
               </div>
             </div>
 
-            {/* Sugar Curve Chart (Dark Theme Mode Passed implicitly or handled inside) */}
-            <div className="[&_.bg-white dark:bg-emerald-950/40]:bg-black/40 [&_.bg-white dark:bg-emerald-950/40]:border-white/10 [&_.text-gray-900 dark:text-emerald-50]:text-emerald-50 [&_.text-gray-600 dark:text-emerald-200/60]:text-emerald-200/60 [&_.border-gray-200 dark:border-emerald-800/50]:border-white/10">
+            {/* Sugar Curve Chart */}
+            <div className="[&_.bg-white]:bg-black/40 [&_.bg-white]:border-white/10 [&_.text-gray-900]:text-emerald-50 [&_.text-gray-600]:text-emerald-200/60 [&_.border-gray-200]:border-white/10">
               <SugarCurveChart currentGL={combinedTotals.glycemicLoad} />
+            </div>
+            
+            {/* Spiritual Tracker */}
+            <div className="border-t border-emerald-900/50 pt-8 mt-4">
+              <div className="text-center mb-6">
+                <h2 className="font-heading text-2xl font-bold text-emerald-50 tracking-wide">
+                  {t('ramadan.spiritualGoals')}
+                </h2>
+                <p className="text-sm text-emerald-200/60 mt-1">{t('ramadan.spiritualSubtitle')}</p>
+              </div>
+
+              <div className="space-y-4">
+                {/* 5 Daily Prayers */}
+                <div className="glass-panel p-5">
+                  <h3 className="font-bold text-emerald-100 mb-3 flex items-center gap-2">
+                    <span>🕌</span> {t('ramadan.prayers')}
+                  </h3>
+                  <div className="flex justify-between items-center bg-black/20 rounded-xl p-2 border border-emerald-900/40">
+                    {(Object.keys(prayers) as Array<keyof typeof prayers>).map(prayer => (
+                      <div key={prayer} className="flex flex-col items-center gap-1.5 flex-1">
+                        <label className="text-xs text-emerald-200/60 capitalize font-medium">{t(`prayer.${prayer}`)}</label>
+                        <input 
+                          type="checkbox" 
+                          checked={prayers[prayer]}
+                          onChange={(e) => setPrayers(prev => ({ ...prev, [prayer]: e.target.checked }))}
+                          className="w-5 h-5 rounded-md border-emerald-800 bg-black/40 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-0 cursor-pointer"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Taraweeh & Adhkar */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="glass-panel p-4 flex flex-col justify-center items-center text-center group cursor-pointer hover:bg-white/5 transition-colors" onClick={() => setTaraweeh(!taraweeh)}>
+                    <span className="text-2xl mb-1">{taraweeh ? '✨' : '🌙'}</span>
+                    <span className="text-sm font-semibold text-emerald-100">{t('ramadan.taraweeh')}</span>
+                    <div className={`mt-2 w-full h-1.5 rounded-full ${taraweeh ? 'bg-emerald-500' : 'bg-emerald-900/40'}`}></div>
+                  </div>
+                  
+                  <div className="glass-panel p-4">
+                    <h3 className="font-bold text-emerald-100 mb-3 text-sm text-center">📿 {t('ramadan.adhkar')}</h3>
+                    <div className="flex justify-around">
+                      <div className="flex flex-col items-center gap-1">
+                        <label className="text-[10px] text-emerald-200/60 uppercase">{t('ramadan.morning')}</label>
+                        <input type="checkbox" checked={adhkar.morning} onChange={(e) => setAdhkar(prev => ({...prev, morning: e.target.checked}))} className="w-4 h-4 rounded text-emerald-500 bg-black/40 border-emerald-800 focus:ring-emerald-500 cursor-pointer" />
+                      </div>
+                      <div className="flex flex-col items-center gap-1">
+                        <label className="text-[10px] text-emerald-200/60 uppercase">{t('ramadan.evening')}</label>
+                        <input type="checkbox" checked={adhkar.evening} onChange={(e) => setAdhkar(prev => ({...prev, evening: e.target.checked}))} className="w-4 h-4 rounded text-emerald-500 bg-black/40 border-emerald-800 focus:ring-emerald-500 cursor-pointer" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quran Progress */}
+                <div className="glass-panel p-5 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl bg-black/40 p-2 rounded-xl shadow-inner">📖</span>
+                    <div>
+                      <h3 className="font-bold text-emerald-100">{t('ramadan.quranReading')}</h3>
+                      <p className="text-xs text-emerald-200/60">{t('ramadan.pagesReadToday')}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 bg-black/30 rounded-xl p-1 border border-emerald-900/30">
+                    <button onClick={() => setQuranPages(Math.max(0, quranPages - 1))} className="w-8 h-8 flex items-center justify-center text-emerald-200 hover:bg-emerald-900/40 rounded-lg transition-colors font-bold">-</button>
+                    <span className="font-black text-xl w-8 text-center text-emerald-50">{quranPages}</span>
+                    <button onClick={() => setQuranPages(quranPages + 1)} className="w-8 h-8 flex items-center justify-center text-emerald-200 hover:bg-emerald-900/40 rounded-lg transition-colors font-bold">+</button>
+                  </div>
+                </div>
+              </div>
             </div>
             
           </div>

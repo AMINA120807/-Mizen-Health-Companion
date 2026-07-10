@@ -26,6 +26,28 @@ const DEFAULT_TASKS: DailyTask[] = [
     unit: 'steps',
     completionHistory: [],
     createdAt: new Date().toISOString()
+  },
+  {
+    id: 'quran-1',
+    title: 'Read Quran',
+    category: 'spiritual',
+    frequency: 'daily',
+    targetCount: 5,
+    currentCount: 0,
+    unit: 'pages',
+    completionHistory: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'groceries-1',
+    title: 'Buy Recipe Ingredients',
+    category: 'cooking',
+    frequency: 'daily',
+    targetCount: 1,
+    currentCount: 0,
+    unit: 'list',
+    completionHistory: [],
+    createdAt: new Date().toISOString()
   }
 ];
 
@@ -136,6 +158,8 @@ export default function DailyTasks() {
       case 'activity': return '🏃🏽‍♂️';
       case 'nutrition': return '🥗';
       case 'mindfulness': return '🧘🏽‍♀️';
+      case 'cooking': return '🛒';
+      case 'spiritual': return '🕌';
       default: return '📌';
     }
   };
@@ -273,8 +297,10 @@ export default function DailyTasks() {
                     <option value="hydration">Hydration 💧</option>
                     <option value="medication">Medication 💊</option>
                     <option value="nutrition">Nutrition 🥗</option>
+                    <option value="cooking">Cooking & Groceries 🛒</option>
                     <option value="activity">Activity 🏃🏽‍♂️</option>
                     <option value="mindfulness">Mindfulness 🧘🏽‍♀️</option>
+                    <option value="spiritual">Spiritual 🕌</option>
                     <option value="other">Other 📌</option>
                   </select>
                 </div>

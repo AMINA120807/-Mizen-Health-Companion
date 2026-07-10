@@ -63,6 +63,22 @@ const translations: Translations = {
   "preset.falafelWrap": { en: "Baked Falafel Wrap", fr: "Wrap de Falafel", ar: "ساندويتش فلافل", dar: "ساندويتش فلافل" },
   "preset.samosas": { en: "Veggie Samosas", fr: "Samoussas aux Légumes", ar: "سمبوسة خضار", dar: "بوراك خضرة" },
   "preset.fruitSalad": { en: "Fruit Salad", fr: "Salade de Fruits", ar: "سلطة فواكه", dar: "شلاضة فاكهة" },
+
+  // Spiritual Tracker
+  "ramadan.spiritualGoals": { en: "Spiritual Goals", fr: "Objectifs Spirituels", ar: "أهداف روحية", dar: "أهداف روحية" },
+  "ramadan.spiritualSubtitle": { en: "Track your daily acts of worship", fr: "Suivez vos actes d'adoration quotidiens", ar: "تتبع أعمالك الصالحة اليومية", dar: "تتبع صلواتك وأذكارك" },
+  "ramadan.prayers": { en: "Daily Prayers", fr: "Prières Quotidiennes", ar: "الصلوات الخمس", dar: "الصلوات الخمسة" },
+  "ramadan.taraweeh": { en: "Taraweeh", fr: "Tarawih", ar: "التراويح", dar: "التراويح" },
+  "ramadan.adhkar": { en: "Adhkar", fr: "Adhkar", ar: "الأذكار", dar: "الأذكار" },
+  "ramadan.morning": { en: "Morning", fr: "Matin", ar: "الصباح", dar: "الصباح" },
+  "ramadan.evening": { en: "Evening", fr: "Soir", ar: "المساء", dar: "المساء" },
+  "ramadan.quranReading": { en: "Quran Reading", fr: "Lecture du Coran", ar: "تلاوة القرآن", dar: "قراءة القرآن" },
+  "ramadan.pagesReadToday": { en: "Pages read today", fr: "Pages lues aujourd'hui", ar: "الصفحات المقروءة اليوم", dar: "الصفحات اللي قريتهم اليوم" },
+  "prayer.fajr": { en: "Fajr", fr: "Fajr", ar: "الفجر", dar: "الفجر" },
+  "prayer.dhuhr": { en: "Dhuhr", fr: "Dhohr", ar: "الظهر", dar: "الظهر" },
+  "prayer.asr": { en: "Asr", fr: "Asr", ar: "العصر", dar: "العصر" },
+  "prayer.maghrib": { en: "Maghrib", fr: "Maghreb", ar: "المغرب", dar: "المغرب" },
+  "prayer.isha": { en: "Isha", fr: "Icha", ar: "العشاء", dar: "العشاء" },
   
   // Smart Swap
   "swap.title": { en: "Smart Swap Suggestion", fr: "Suggestion Maligne", ar: "اقتراح ذكي", dar: "اقتراح ذكي" },

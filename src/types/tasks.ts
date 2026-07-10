@@ -1,5 +1,5 @@
 export type TaskFrequency = 'daily' | 'weekly' | 'custom';
-export type TaskCategory = 'hydration' | 'medication' | 'activity' | 'nutrition' | 'mindfulness' | 'other';
+export type TaskCategory = 'hydration' | 'medication' | 'activity' | 'nutrition' | 'mindfulness' | 'cooking' | 'spiritual' | 'other';
 
 export interface DailyTask {
   id: string;
