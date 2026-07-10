@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 222.2 47.4% 11.2%;
+
+    --primary: 154 50% 36%; /* Algerian Green */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 24 9.8% 10%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 43 96% 56%; /* Gold/Orange Accent */
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 154 50% 36%;
+    
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)];
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Micro-animations */
+  .hover-lift {
+    @apply transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg;
+  }
+}
+
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  .print-hide {
+    display: none !important;
+  }
+
+  .print-show {
+    display: block !important;
+  }
+
+  .print-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .print-container {
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  .print-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* 2 columns on print looks good for 7 days */
+    gap: 10px !important;
+    page-break-inside: avoid;
+  }
+
+  .print-card {
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    border-radius: 4px !important;
+    page-break-inside: avoid;
+  }
+
+  .print-card-header {
+    background: #f8f8f8 !important;
+    color: black !important;
+    border-bottom: 1px solid #ddd !important;
+  }
+
+  .print-empty-slots {
+    display: flex !important;
+  }
+}
+
