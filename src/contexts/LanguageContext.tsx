@@ -24,7 +24,6 @@ const translations: Translations = {
   "nav.ramadanMode": { en: "Ramadan Mode 🌙", fr: "Mode Ramadan 🌙", ar: "وضع رمضان 🌙", dar: "وضع رمضان 🌙" },
   "nav.history": { en: "History", fr: "Historique", ar: "تاريخي", dar: "تاريخي" },
   "nav.createRecipe": { en: "Create Recipe", fr: "Créer une Recette", ar: "إنشاء وصفة", dar: "صنع وصفة" },
-  "nav.dietitians": { en: "Experts", fr: "Experts", ar: "المختصين", dar: "المختصين" },
   "nav.weekly": { en: "Weekly Plan", fr: "Plan Hebdo", ar: "خطة أسبوعية", dar: "خطة سمانة" },
   "nav.tasks": { en: "Daily Goals", fr: "Objectifs", ar: "أهداف يومية", dar: "أهداف يومية" },
   "nav.hub": { en: "Health Hub", fr: "Espace Santé", ar: "مركز الصحة", dar: "ركن الصحة" },

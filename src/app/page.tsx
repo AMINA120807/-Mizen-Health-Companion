@@ -7,7 +7,6 @@ import MealBuilder from '../components/MealBuilder';
 import RamadanPlanner from '../components/RamadanPlanner';
 import HistoryTab from '../components/HistoryTab';
 import RecipeBuilder from '../components/RecipeBuilder';
-import DietitianDirectory from '../components/DietitianDirectory';
 import WeeklyPlanner from '../components/WeeklyPlanner';
 import DailyTasks from '../components/DailyTasks';
 import HealthHub from '../components/HealthHub';
@@ -23,7 +22,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 export default function Home() {
   const [foods, setFoods] = useState<FoodItem[]>([]);
-  const [mode, setMode] = useState<'standard' | 'ramadan' | 'history' | 'recipe' | 'dietitians' | 'weekly' | 'tasks' | 'hub' | 'community' | 'scanner' | 'chef' | 'profile'>('standard');
+  const [mode, setMode] = useState<'standard' | 'ramadan' | 'history' | 'recipe' | 'weekly' | 'tasks' | 'hub' | 'community' | 'scanner' | 'chef' | 'profile'>('standard');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showInstallModal, setShowInstallModal] = useState(false);
   const { t } = useTranslation();
@@ -125,12 +124,6 @@ export default function Home() {
             <span className="text-xl">🌍</span> {t('nav.community')}
           </button>
           <button 
-            onClick={() => { setMode('dietitians'); setIsMenuOpen(false); }}
-            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'dietitians' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
-          >
-            <span className="text-xl">👨‍⚕️</span> {t('nav.dietitians')}
-          </button>
-          <button 
             onClick={() => { setMode('ramadan'); setIsMenuOpen(false); }}
             className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'ramadan' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-[#f57f17] border-l-4 border-[#f57f17]' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
           >
@@ -166,7 +159,6 @@ export default function Home() {
       {mode === 'weekly' && <WeeklyPlanner foods={foods} />}
       {mode === 'ramadan' && <RamadanPlanner foods={foods} />}
       {mode === 'history' && <HistoryTab />}
-      {mode === 'dietitians' && <DietitianDirectory />}
       {mode === 'recipe' && (
         <RecipeBuilder 
           foods={foods} 
