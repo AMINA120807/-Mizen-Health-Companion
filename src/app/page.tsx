@@ -60,10 +60,7 @@ export default function Home() {
         {/* Center Logo Group with glowing effect */}
         <div className="flex items-center justify-center gap-3 cursor-pointer relative group" onClick={() => setMode('standard')}>
           <div className="absolute -inset-4 bg-emerald-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-[0_0_15px_rgba(52,211,153,0.4)] relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay"></div>
-            <span className="text-xl font-black text-white relative z-10 drop-shadow-md tracking-tighter">M</span>
-          </div>
+          <img src="/icon.png" alt="Mizen Logo" className="w-10 h-10 rounded-full shadow-[0_0_15px_rgba(52,211,153,0.4)] relative z-10" />
           <h1 className="text-lg font-black bg-gradient-to-r from-emerald-300 to-emerald-100 bg-clip-text text-transparent tracking-widest uppercase drop-shadow-sm">Mizen</h1>
         </div>
       </header>
