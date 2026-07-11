@@ -4,7 +4,7 @@ import "./globals.css";
 import { LanguageProvider } from "../contexts/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ErrorBoundary from "../components/ErrorBoundary";
-import { ThemeProvider } from "../contexts/ThemeContext";
+import { ThemeProvider } from "../components/ThemeProvider";
 import { AuthProvider } from "../contexts/AuthContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
