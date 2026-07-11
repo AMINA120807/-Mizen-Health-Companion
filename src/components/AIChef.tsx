@@ -240,13 +240,17 @@ export default function AIChef() {
         
       if (userIngredientsList.length === 0) userIngredientsList.push("Ingrédient mystère");
 
-      // Chercher chaque ingrédient dans mockFoods pour extraire les calories et macros réelles
+      // Chercher chaque ingrédient dans mockFoods pour extraire les macros et catégoriser
       let totalCals = 0;
       let totalProt = 0;
       let totalCarbs = 0;
       let totalFat = 0;
       
       const preciseIngredients: string[] = [];
+      const meats: string[] = [];
+      const veggies: string[] = [];
+      const carbs: string[] = [];
+      const others: string[] = [];
 
       userIngredientsList.forEach(ing => {
         const normIng = normalize(ing);
@@ -258,6 +262,8 @@ export default function AIChef() {
           normalize(food.name_darija || "").includes(normIng)
         );
 
+        const ingName = ing.charAt(0).toUpperCase() + ing.slice(1);
+
         if (matchedFood) {
           totalCals += matchedFood.calories_per_100g;
           totalProt += matchedFood.protein_g;
@@ -266,9 +272,23 @@ export default function AIChef() {
           
           // Formater précisément
           const portionText = matchedFood.typical_portion_label ? `${matchedFood.typical_portion_label} (${matchedFood.typical_portion_grams}g)` : `100g`;
-          preciseIngredients.push(`${portionText} de ${ing.charAt(0).toUpperCase() + ing.slice(1)}`);
+          preciseIngredients.push(`${portionText} de ${ingName}`);
+
+          // Catégoriser pour la recette
+          const cat = matchedFood.category;
+          if (cat === "Viandes & Poissons" || cat === "Protéines") meats.push(ingName);
+          else if (cat === "Légumes" || cat.includes("Salade")) veggies.push(ingName);
+          else if (cat === "Plats Principaux" || normIng.includes("riz") || normIng.includes("pate") || normIng.includes("pain")) carbs.push(ingName);
+          else others.push(ingName);
+
         } else {
-          preciseIngredients.push(`Quantité au choix de ${ing.charAt(0).toUpperCase() + ing.slice(1)}`);
+          preciseIngredients.push(`Quantité au choix de ${ingName}`);
+          
+          // Guessing pour les ingrédients non trouvés
+          if (normIng.includes("poulet") || normIng.includes("viande") || normIng.includes("oeuf")) meats.push(ingName);
+          else if (normIng.includes("tomate") || normIng.includes("oignon")) veggies.push(ingName);
+          else if (normIng.includes("riz") || normIng.includes("pate")) carbs.push(ingName);
+          else others.push(ingName);
         }
       });
 
@@ -282,7 +302,7 @@ export default function AIChef() {
         totalFat = Math.floor(Math.random() * 10) + 2;
       } else {
         // Ajuster pour faire une portion réaliste (~250g total)
-        const factor = 2.5 / matchedIngredientsCount; 
+        const factor = 2.5 / (matchedIngredientsCount || 1); 
         totalCals = Math.round(totalCals * factor);
         totalProt = Math.round(totalProt * factor);
         totalCarbs = Math.round(totalCarbs * factor);
@@ -300,14 +320,47 @@ export default function AIChef() {
       
       const mainIngredient = userIngredientsList[0];
       const secondIngredient = userIngredientsList.length > 1 ? userIngredientsList[1] : "";
-      const cookingMethods = ["Poêlée minute", "Salade express", "Gratin simple", "Papillote légère", "Mijoté maison", "Bowl santé"];
-      const method = cookingMethods[Math.floor(Math.random() * cookingMethods.length)];
+      
+      let method = "Poêlée";
+      if (meats.length > 0 && carbs.length === 0) method = "Sauté hyperprotéiné";
+      else if (veggies.length > 0 && meats.length === 0) method = "Plat végétarien";
+      else if (carbs.length > 0) method = "Bowl santé";
+      else method = ["Poêlée express", "Papillote légère", "Mijoté maison"][Math.floor(Math.random() * 3)];
       
       const dynamicTitle = secondIngredient 
-        ? `${method} de ${mainIngredient} et ${secondIngredient}`
-        : `${method} à base de ${mainIngredient}`;
+        ? `${method} de ${mainIngredient.charAt(0).toUpperCase() + mainIngredient.slice(1)} et ${secondIngredient}`
+        : `${method} à base de ${mainIngredient.charAt(0).toUpperCase() + mainIngredient.slice(1)}`;
 
       const finalIngredients = [...preciseIngredients];
+
+      // Génération dynamique des instructions
+      const smartInstructions: string[] = [];
+      
+      if (veggies.length > 0) {
+        smartInstructions.push(`Lavez, épluchez et coupez vos légumes (${veggies.join(", ")}).`);
+      }
+      
+      smartInstructions.push(`Faites chauffer une poêle ou une marmite avec un léger filet d'huile d'olive.`);
+      
+      if (meats.length > 0) {
+        smartInstructions.push(`Commencez par faire revenir vos protéines (${meats.join(", ")}) pour bien les dorer de chaque côté.`);
+      }
+      
+      if (veggies.length > 0) {
+        const addedTo = meats.length > 0 ? "Ajoutez ensuite les légumes" : "Faites revenir les légumes";
+        smartInstructions.push(`${addedTo} et laissez cuire à feu moyen jusqu'à ce qu'ils soient tendres.`);
+      }
+      
+      if (carbs.length > 0) {
+        smartInstructions.push(`Pendant ce temps, faites cuire ${carbs.join(", ")} (si nécessaire) dans une casserole d'eau bouillante, puis incorporez-les au mélange.`);
+      }
+      
+      if (others.length > 0) {
+        smartInstructions.push(`Ajoutez le reste de vos ingrédients : ${others.join(", ")}.`);
+      }
+      
+      smartInstructions.push(`Assaisonnez à votre goût avec du sel, du poivre et vos épices préférées, puis laissez mijoter quelques minutes pour lier les saveurs.`);
+      smartInstructions.push(`Servez bien chaud. Ce repas sur-mesure est parfaitement équilibré et vous apportera environ ${totalProt}g de protéines !`);
 
       const generatedFallbackRecipe: Recipe = {
         title: dynamicTitle,
@@ -316,16 +369,9 @@ export default function AIChef() {
         protein: totalProt,
         carbs: totalCarbs,
         fat: totalFat,
-        time: `${Math.floor(Math.random() * 15) + 5} min`,
+        time: `${Math.floor(Math.random() * 15) + 10} min`,
         ingredients: finalIngredients,
-        instructions: [
-          `Préparez vos ingrédients : lavez et découpez ${userIngredientsList.join(", ")}.`,
-          `Choisissez votre mode de cuisson préféré (poêle, four ou vapeur).`,
-          `Si vous le souhaitez, vous pouvez ajouter une petite pincée de sel, de poivre et un filet d'huile d'olive (optionnel).`,
-          `Commencez par cuire ${mainIngredient} en premier car c'est votre ingrédient principal.`,
-          secondIngredient ? `Incorporez ensuite ${secondIngredient} et le reste de vos ingrédients.` : `Laissez cuire doucement jusqu'à ce que ce soit tendre.`,
-          `Servez bien chaud et savourez cette recette personnalisée, qui contient environ ${totalProt}g de protéines !`
-        ]
+        instructions: smartInstructions
       };
       
       setRecipe(generatedFallbackRecipe);
