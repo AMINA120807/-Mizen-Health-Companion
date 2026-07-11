@@ -245,7 +245,8 @@ export default function AIChef() {
       let totalProt = 0;
       let totalCarbs = 0;
       let totalFat = 0;
-      let matchedIngredients = 0;
+      
+      const preciseIngredients: string[] = [];
 
       userIngredientsList.forEach(ing => {
         const normIng = normalize(ing);
@@ -262,19 +263,26 @@ export default function AIChef() {
           totalProt += matchedFood.protein_g;
           totalCarbs += matchedFood.carbs_g;
           totalFat += matchedFood.fat_g;
-          matchedIngredients += 1;
+          
+          // Formater précisément
+          const portionText = matchedFood.typical_portion_label ? `${matchedFood.typical_portion_label} (${matchedFood.typical_portion_grams}g)` : `100g`;
+          preciseIngredients.push(`${portionText} de ${ing.charAt(0).toUpperCase() + ing.slice(1)}`);
+        } else {
+          preciseIngredients.push(`Quantité au choix de ${ing.charAt(0).toUpperCase() + ing.slice(1)}`);
         }
       });
 
+      const matchedIngredientsCount = preciseIngredients.filter(p => !p.startsWith("Quantité")).length;
+
       // Si on n'a rien trouvé du tout, on donne des valeurs génériques
-      if (matchedIngredients === 0) {
+      if (matchedIngredientsCount === 0) {
         totalCals = Math.floor(Math.random() * 250) + 100;
         totalProt = Math.floor(Math.random() * 15) + 5;
         totalCarbs = Math.floor(Math.random() * 20) + 10;
         totalFat = Math.floor(Math.random() * 10) + 2;
       } else {
         // Ajuster pour faire une portion réaliste (~250g total)
-        const factor = 2.5 / matchedIngredients; 
+        const factor = 2.5 / matchedIngredientsCount; 
         totalCals = Math.round(totalCals * factor);
         totalProt = Math.round(totalProt * factor);
         totalCarbs = Math.round(totalCarbs * factor);
@@ -299,7 +307,7 @@ export default function AIChef() {
         ? `${method} de ${mainIngredient} et ${secondIngredient}`
         : `${method} à base de ${mainIngredient}`;
 
-      const finalIngredients = [...userIngredientsList];
+      const finalIngredients = [...preciseIngredients];
 
       const generatedFallbackRecipe: Recipe = {
         title: dynamicTitle,
