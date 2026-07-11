@@ -127,9 +127,6 @@ export default function AIChef() {
       const mainIngredient = userIngredientsList[0];
       const secondIngredient = userIngredientsList.length > 1 ? userIngredientsList[1] : "";
       
-      const isAr = language === 'ar' || language === 'dar';
-      const isEn = language === 'en';
-      
       let method = "Poêlée";
       if (meats.length > 0 && carbs.length === 0) method = isEn ? "High-Protein Stir-fry" : isAr ? "طبق مقلي غني بالبروتين" : "Sauté hyperprotéiné";
       else if (veggies.length > 0 && meats.length === 0) method = isEn ? "Vegetarian Dish" : isAr ? "طبق نباتي" : "Plat végétarien";
