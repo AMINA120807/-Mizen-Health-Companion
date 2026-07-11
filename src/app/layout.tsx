@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "../contexts/LanguageContext";
-import LanguageSwitcher from "../components/LanguageSwitcher";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { ThemeProvider } from "../components/ThemeProvider";
 import { AuthProvider } from "../contexts/AuthContext";
@@ -35,9 +34,6 @@ export default function RootLayout({
                 {/* Top ambient glow for whole app */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-40 bg-emerald-500/10 blur-[60px] pointer-events-none z-0"></div>
                 
-                <header className="p-4 flex justify-end items-center border-b border-emerald-900/40 relative z-10">
-                  <LanguageSwitcher />
-                </header>
                 <div className="p-4 flex-1 relative z-10">
                   <ErrorBoundary>
                     {children}

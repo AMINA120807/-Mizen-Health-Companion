@@ -17,6 +17,7 @@ import AIChef from '../components/AIChef';
 import InstallModal from '../components/InstallModal';
 import AuthScreen from '../components/AuthScreen';
 import UserProfile from '../components/UserProfile';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 import { useTranslation } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -44,26 +45,28 @@ export default function Home() {
   }
 
   return (
-    <div className="space-y-8 py-4 animate-in fade-in duration-500 print-wrapper">
+    <div className="space-y-4 py-4 animate-in fade-in duration-500 print-wrapper relative">
+      {/* Top Navigation Header */}
+      <header className="flex justify-between items-center px-2 mb-4 relative z-50 print-hide">
+        <button 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="p-3 bg-black/40 hover:bg-emerald-900/40 border border-emerald-900/50 rounded-xl text-emerald-50 transition-colors shadow-sm flex items-center justify-center"
+          aria-label="Toggle menu"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
+          </svg>
+        </button>
+        <LanguageSwitcher />
+      </header>
+
       <div className="text-center print-hide flex flex-col items-center justify-center">
         <img src="/icon.png" alt="Mizen Logo" className="w-20 h-20 mb-4 rounded-2xl shadow-lg border border-emerald-900/30" />
         <h1 className="font-heading text-4xl font-extrabold text-gray-900 dark:text-emerald-50 mb-2 tracking-tight">{t('app.title')}</h1>
         <p className="text-gray-500 dark:text-emerald-200/60 font-medium">{t('app.subtitle')}</p>
       </div>
 
-      <div className="w-full pb-2 -mb-2 print-hide relative z-20">
-        <div className="flex justify-end mb-3">
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2.5 bg-black/40 hover:bg-emerald-900/40 border border-emerald-900/50 rounded-xl text-emerald-50 flex items-center gap-2 transition-colors shadow-sm"
-          >
-            <span className="font-bold text-sm uppercase tracking-wider text-emerald-200/80 mr-1">Menu</span>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
-            </svg>
-          </button>
-        </div>
-
+      <div className="w-full pb-2 -mb-2 print-hide relative z-40">
         <div className={`flex flex-col gap-1 glass-panel mx-auto shadow-sm overflow-hidden transition-all duration-500 ease-in-out ${isMenuOpen ? 'max-h-[1200px] opacity-100 p-3 mb-6' : 'max-h-0 opacity-0 p-0 border-0'}`}>
           
           {/* Section: Repas & Recettes */}
