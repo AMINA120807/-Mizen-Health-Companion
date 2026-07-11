@@ -57,14 +57,16 @@ export default function Home() {
           </svg>
         </button>
         <LanguageSwitcher />
+        {/* Center Logo Group with glowing effect */}
+        <div className="flex items-center justify-center gap-3 cursor-pointer relative group" onClick={() => setMode('standard')}>
+          <div className="absolute -inset-4 bg-emerald-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-[0_0_15px_rgba(52,211,153,0.4)] relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay"></div>
+            <span className="text-xl font-black text-white relative z-10 drop-shadow-md tracking-tighter">M</span>
+          </div>
+          <h1 className="text-lg font-black bg-gradient-to-r from-emerald-300 to-emerald-100 bg-clip-text text-transparent tracking-widest uppercase drop-shadow-sm">Mizen</h1>
+        </div>
       </header>
-
-      <div className="text-center print-hide flex flex-col items-center justify-center relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-emerald-500/20 blur-[40px] rounded-full pointer-events-none z-0"></div>
-        <img src="/icon.png" alt="Mizen Logo" className="w-24 h-24 mb-4 rounded-3xl shadow-2xl border border-emerald-500/20 relative z-10" />
-        <h1 className="font-heading text-4xl font-black text-gray-900 dark:text-emerald-50 mb-2 tracking-tight relative z-10 drop-shadow-sm">{t('app.title')}</h1>
-        <p className="text-emerald-700 dark:text-emerald-300/80 font-medium tracking-wide relative z-10 uppercase text-xs">{t('app.subtitle')}</p>
-      </div>
 
       <div className="w-full pb-2 -mb-2 print-hide relative z-40">
         <div className={`flex flex-col gap-2 bg-gradient-to-b from-[#0b2918] to-[#071a0f] border border-emerald-700/50 rounded-3xl mx-auto shadow-2xl overflow-hidden transition-all duration-500 origin-top ease-out ${isMenuOpen ? 'max-h-[1500px] opacity-100 p-6 mb-8 scale-y-100' : 'max-h-0 opacity-0 p-0 border-0 scale-y-95'}`}>

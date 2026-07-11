@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans bg-gray-50 dark:bg-[#0b1912] text-gray-900 dark:text-emerald-50 transition-colors duration-300`}>
         <AuthProvider>
           <LanguageProvider>
-            <ThemeProvider>
+            <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
               <main className="w-full max-w-5xl mx-auto glass min-h-screen shadow-2xl border-x border-emerald-900/40 flex flex-col relative overflow-hidden">
                 {/* Top ambient glow for whole app */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-40 bg-emerald-500/10 blur-[60px] pointer-events-none z-0"></div>
