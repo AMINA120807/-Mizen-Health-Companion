@@ -207,7 +207,19 @@ const translations: Translations = {
   "chef.subtitle": { en: "What's in your fridge? Let's make a healthy meal!", fr: "Qu'avez-vous dans le frigo ? Faisons un repas sain !", ar: "ماذا يوجد في ثلاجتك؟ لنجعل وجبة صحية!", dar: "واش كاين في فريجيدارك؟ نديرو ماكلة صحية!" },
   "chef.ingredients": { en: "Enter ingredients (e.g. Chicken, Olives...)", fr: "Entrez vos ingrédients (ex. Poulet, Olives...)", ar: "أدخل المكونات (مثل الدجاج، الزيتون...)", dar: "اكتب واش عندك (دجاج، زيتون...)" },
   "chef.generateBtn": { en: "Generate Recipe", fr: "Générer une Recette", ar: "توليد وصفة", dar: "اعطيني وصفة" },
-  "chef.generating": { en: "Chef is thinking...", fr: "Le Chef réfléchit...", ar: "الشيف يفكر...", dar: "الشاف راه يخمم..." }
+  "chef.generating": { en: "Chef is thinking...", fr: "Le Chef réfléchit...", ar: "الشيف يفكر...", dar: "الشاف راه يخمم..." },
+
+  // Authentication & Profile
+  "nav.profile": { en: "My Profile", fr: "Mon Profil", ar: "حسابي", dar: "حسابي" },
+  "auth.login": { en: "Log In", fr: "Se Connecter", ar: "تسجيل الدخول", dar: "دخول" },
+  "auth.register": { en: "Create Account", fr: "Créer un Compte", ar: "إنشاء حساب", dar: "سجل حساب" },
+  "auth.name": { en: "Full Name", fr: "Nom Complet", ar: "الاسم الكامل", dar: "الاسم" },
+  "auth.email": { en: "Email Address", fr: "Adresse Email", ar: "البريد الإلكتروني", dar: "الإيميل" },
+  "auth.password": { en: "Password", fr: "Mot de passe", ar: "كلمة المرور", dar: "كلمة السر" },
+  "auth.error": { en: "Incorrect password or account not found.", fr: "Mot de passe incorrect ou compte introuvable.", ar: "كلمة المرور غير صحيحة أو الحساب غير موجود.", dar: "المودباس غالط ولا الحساب ماكاشو." },
+  "auth.logout": { en: "Log Out", fr: "Se Déconnecter", ar: "تسجيل الخروج", dar: "خروج" },
+  "profile.welcome": { en: "Welcome back", fr: "Bienvenue", ar: "مرحباً", dar: "مرحبا بيك" },
+  "profile.stats": { en: "Your Statistics", fr: "Vos Statistiques", ar: "إحصائياتك", dar: "الستاتس تاوعك" }
 };
 
 interface LanguageContextType {

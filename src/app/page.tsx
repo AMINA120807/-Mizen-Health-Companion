@@ -15,14 +15,18 @@ import CommunityFeed from '../components/CommunityFeed';
 import BarcodeScanner from '../components/BarcodeScanner';
 import AIChef from '../components/AIChef';
 import InstallModal from '../components/InstallModal';
+import AuthScreen from '../components/AuthScreen';
+import UserProfile from '../components/UserProfile';
 import { useTranslation } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Home() {
   const [foods, setFoods] = useState<FoodItem[]>([]);
-  const [mode, setMode] = useState<'standard' | 'ramadan' | 'history' | 'recipe' | 'dietitians' | 'weekly' | 'tasks' | 'hub' | 'community' | 'scanner' | 'chef'>('standard');
+  const [mode, setMode] = useState<'standard' | 'ramadan' | 'history' | 'recipe' | 'dietitians' | 'weekly' | 'tasks' | 'hub' | 'community' | 'scanner' | 'chef' | 'profile'>('standard');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showInstallModal, setShowInstallModal] = useState(false);
   const { t } = useTranslation();
+  const { user, isReady } = useAuth();
 
   const fetchFoods = useCallback(() => {
     getAllFoods().then(setFoods);
@@ -32,6 +36,9 @@ export default function Home() {
     fetchFoods();
   }, [fetchFoods]);
 
+  if (!isReady) return <div className="text-center py-20 text-gray-500">{t('app.loading')}</div>;
+  if (!user) return <AuthScreen />;
+  
   if (foods.length === 0) {
     return <div className="text-center py-20 text-gray-500 dark:text-emerald-200/60">{t('app.loading')}</div>;
   }
@@ -130,6 +137,13 @@ export default function Home() {
           <div className="h-px w-full bg-emerald-900/30 my-2"></div>
 
           {/* Section: Application */}
+          <div className="text-xs font-bold uppercase tracking-wider text-emerald-500/80 px-4 py-2">⚙️ Application</div>
+          <button 
+            onClick={() => { setMode('profile'); setIsMenuOpen(false); }}
+            className={`py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 ${mode === 'profile' ? 'bg-gradient-to-r from-emerald-900/60 to-transparent text-emerald-50 border-l-4 border-emerald-500' : 'text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent'}`}
+          >
+            <span className="text-xl">👤</span> {t('nav.profile')}
+          </button>
           <button 
             onClick={() => { setShowInstallModal(true); setIsMenuOpen(false); }}
             className="py-3 px-4 text-sm font-bold rounded-xl transition-all flex items-center gap-3 text-emerald-200/60 hover:text-emerald-50 hover:bg-white/5 border-l-4 border-transparent"
@@ -139,6 +153,7 @@ export default function Home() {
         </div>
       </div>
 
+      {mode === 'profile' && <UserProfile />}
       {mode === 'standard' && <MealBuilder foods={foods} />}
       {mode === 'tasks' && <DailyTasks />}
       {mode === 'hub' && <HealthHub />}

@@ -4,7 +4,8 @@ import "./globals.css";
 import { LanguageProvider } from "../contexts/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ErrorBoundary from "../components/ErrorBoundary";
-import { ThemeProvider } from "../components/ThemeProvider";
+import { ThemeProvider } from "../contexts/ThemeContext";
+import { AuthProvider } from "../contexts/AuthContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -26,28 +27,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
-      <body className="font-sans min-h-screen">
-        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+      <body className={`${inter.variable} font-sans bg-gray-50 dark:bg-[#0b1912] text-gray-900 dark:text-emerald-50 transition-colors duration-300`}>
+        <AuthProvider>
           <LanguageProvider>
-            <main className="w-full max-w-5xl mx-auto glass min-h-screen shadow-2xl border-x border-emerald-900/40 flex flex-col relative overflow-hidden">
-              {/* Top ambient glow for whole app */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-40 bg-emerald-500/10 blur-[60px] pointer-events-none z-0"></div>
-              
-              <header className="p-4 flex justify-end items-center border-b border-emerald-900/40 relative z-10">
-                <LanguageSwitcher />
-            </header>
-            <div className="p-4 flex-1 relative z-10">
-              <ErrorBoundary>
-                {children}
-              </ErrorBoundary>
-            </div>
-            </main>
+            <ThemeProvider>
+              <main className="w-full max-w-5xl mx-auto glass min-h-screen shadow-2xl border-x border-emerald-900/40 flex flex-col relative overflow-hidden">
+                {/* Top ambient glow for whole app */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-40 bg-emerald-500/10 blur-[60px] pointer-events-none z-0"></div>
+                
+                <header className="p-4 flex justify-end items-center border-b border-emerald-900/40 relative z-10">
+                  <LanguageSwitcher />
+                </header>
+                <div className="p-4 flex-1 relative z-10">
+                  <ErrorBoundary>
+                    {children}
+                  </ErrorBoundary>
+                </div>
+              </main>
+            </ThemeProvider>
           </LanguageProvider>
-        </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
-}
-
-
 
