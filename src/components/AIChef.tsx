@@ -1,13 +1,17 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from '../contexts/LanguageContext';
+import { mockFoods } from '../data/mockData';
 
 interface Recipe {
   id?: string;
   title: string;
   desc: string;
   calories: number;
+  protein?: number;
+  carbs?: number;
+  fat?: number;
   time: string;
   ingredients: string[];
   instructions: string[];
@@ -19,6 +23,7 @@ export default function AIChef() {
   const [ingredients, setIngredients] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [typingIndex, setTypingIndex] = useState(0);
 
   // Base de données interne de vraies recettes algériennes avec leurs ingrédients clés
   const recipeDatabase: Recipe[] = [
@@ -192,6 +197,7 @@ export default function AIChef() {
     if (!ingredients.trim()) return;
     setIsGenerating(true);
     setRecipe(null);
+    setTypingIndex(0);
     
     // Simulate AI thinking
     setTimeout(() => {
@@ -203,7 +209,7 @@ export default function AIChef() {
         .map(normalize)
         .filter(word => word.length > 2); // ignorer 'et', 'de', 'le'...
 
-      // 2. Calculer le score de chaque recette
+      // 2. Calculer le score de chaque recette prédéfinie
       let bestRecipe: Recipe | null = null;
       let highestScore = 0;
 
@@ -212,7 +218,6 @@ export default function AIChef() {
         if (recipe.coreIngredients) {
           for (const coreIng of recipe.coreIngredients) {
             const normalizedCore = normalize(coreIng);
-            // Si un des mots de l'utilisateur correspond ou contient l'ingrédient clé
             if (userWords.some(w => w.includes(normalizedCore) || normalizedCore.includes(w))) {
               score += 1;
             }
@@ -225,13 +230,9 @@ export default function AIChef() {
         }
       }
 
-      // 3. Si une recette a matché, on l'utilise
-      if (bestRecipe && highestScore > 0) {
-        setRecipe(bestRecipe);
-        return;
-      }
+      // Si on trouve une recette avec un score parfait, on la renvoie
+      // Sinon, on calcule les macros avec mockFoods
       
-      // 4. Sinon (Fallback) : Générer une recette dynamique sur mesure avec JUSTE les ingrédients de l'utilisateur
       const userIngredientsList = ingredients
         .split(/[,;]/)
         .map(i => i.trim())
@@ -239,9 +240,55 @@ export default function AIChef() {
         
       if (userIngredientsList.length === 0) userIngredientsList.push("Ingrédient mystère");
 
-      // On n'ajoute PLUS d'ingrédients aléatoires ("randomStaples") comme l'oignon ou l'ail par défaut.
-      // Le Chef se concentre UNIQUEMENT sur ce que l'utilisateur a donné.
-      const finalIngredients = [...userIngredientsList];
+      // Chercher chaque ingrédient dans mockFoods pour extraire les calories et macros réelles
+      let totalCals = 0;
+      let totalProt = 0;
+      let totalCarbs = 0;
+      let totalFat = 0;
+      let matchedIngredients = 0;
+
+      userIngredientsList.forEach(ing => {
+        const normIng = normalize(ing);
+        // Trouver l'aliment qui matche le mieux
+        const matchedFood = mockFoods.find(food => 
+          normalize(food.name_fr).includes(normIng) || 
+          normalize(food.name_ar).includes(normIng) ||
+          normalize(food.name_en || "").includes(normIng) ||
+          normalize(food.name_darija || "").includes(normIng)
+        );
+
+        if (matchedFood) {
+          totalCals += matchedFood.calories_per_100g;
+          totalProt += matchedFood.protein_g;
+          totalCarbs += matchedFood.carbs_g;
+          totalFat += matchedFood.fat_g;
+          matchedIngredients += 1;
+        }
+      });
+
+      // Si on n'a rien trouvé du tout, on donne des valeurs génériques
+      if (matchedIngredients === 0) {
+        totalCals = Math.floor(Math.random() * 250) + 100;
+        totalProt = Math.floor(Math.random() * 15) + 5;
+        totalCarbs = Math.floor(Math.random() * 20) + 10;
+        totalFat = Math.floor(Math.random() * 10) + 2;
+      } else {
+        // Ajuster pour faire une portion réaliste (~250g total)
+        const factor = 2.5 / matchedIngredients; 
+        totalCals = Math.round(totalCals * factor);
+        totalProt = Math.round(totalProt * factor);
+        totalCarbs = Math.round(totalCarbs * factor);
+        totalFat = Math.round(totalFat * factor);
+      }
+
+      if (bestRecipe && highestScore > 1) {
+        // Ajouter les macros approximatives à la recette de base si elle n'en a pas
+        bestRecipe.protein = totalProt > 0 ? totalProt : 15;
+        bestRecipe.carbs = totalCarbs > 0 ? totalCarbs : 25;
+        bestRecipe.fat = totalFat > 0 ? totalFat : 10;
+        setRecipe(bestRecipe);
+        return;
+      }
       
       const mainIngredient = userIngredientsList[0];
       const secondIngredient = userIngredientsList.length > 1 ? userIngredientsList[1] : "";
@@ -252,10 +299,15 @@ export default function AIChef() {
         ? `${method} de ${mainIngredient} et ${secondIngredient}`
         : `${method} à base de ${mainIngredient}`;
 
+      const finalIngredients = [...userIngredientsList];
+
       const generatedFallbackRecipe: Recipe = {
         title: dynamicTitle,
         desc: "Une recette 100% sur-mesure utilisant UNIQUEMENT les ingrédients que vous avez listés (assaisonnement libre) !",
-        calories: Math.floor(Math.random() * 250) + 100, 
+        calories: totalCals,
+        protein: totalProt,
+        carbs: totalCarbs,
+        fat: totalFat,
         time: `${Math.floor(Math.random() * 15) + 5} min`,
         ingredients: finalIngredients,
         instructions: [
@@ -264,13 +316,23 @@ export default function AIChef() {
           `Si vous le souhaitez, vous pouvez ajouter une petite pincée de sel, de poivre et un filet d'huile d'olive (optionnel).`,
           `Commencez par cuire ${mainIngredient} en premier car c'est votre ingrédient principal.`,
           secondIngredient ? `Incorporez ensuite ${secondIngredient} et le reste de vos ingrédients.` : `Laissez cuire doucement jusqu'à ce que ce soit tendre.`,
-          `Servez bien chaud et savourez cette recette personnalisée !`
+          `Servez bien chaud et savourez cette recette personnalisée, qui contient environ ${totalProt}g de protéines !`
         ]
       };
       
       setRecipe(generatedFallbackRecipe);
     }, 1800);
   };
+
+  // Effet machine à écrire pour les instructions
+  useEffect(() => {
+    if (recipe && typingIndex < recipe.instructions.length) {
+      const timer = setTimeout(() => {
+        setTypingIndex(prev => prev + 1);
+      }, 800); // 800ms par étape pour donner l'illusion que l'IA écrit
+      return () => clearTimeout(timer);
+    }
+  }, [recipe, typingIndex]);
 
   return (
     <div className="w-full max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
@@ -319,13 +381,28 @@ export default function AIChef() {
               <h3 className="font-bold text-2xl text-emerald-900 dark:text-emerald-50 mb-2">{recipe.title}</h3>
               <p className="text-gray-600 dark:text-emerald-200/80 mb-6 italic">{recipe.desc}</p>
               
-              <div className="flex gap-4 mb-6">
+              <div className="flex flex-wrap gap-2 mb-6">
                 <span className="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-200 px-3 py-1 rounded-lg font-bold text-sm">
                   🔥 {recipe.calories} kcal
                 </span>
                 <span className="bg-orange-100 dark:bg-orange-900/40 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-lg font-bold text-sm">
                   ⏱️ {recipe.time}
                 </span>
+                {recipe.protein && (
+                  <span className="bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-lg font-bold text-sm">
+                    🥩 Prot: {recipe.protein}g
+                  </span>
+                )}
+                {recipe.carbs && (
+                  <span className="bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded-lg font-bold text-sm">
+                    🍞 Glu: {recipe.carbs}g
+                  </span>
+                )}
+                {recipe.fat && (
+                  <span className="bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-200 px-3 py-1 rounded-lg font-bold text-sm">
+                    🥑 Lip: {recipe.fat}g
+                  </span>
+                )}
               </div>
               
               <h4 className="font-bold text-gray-800 dark:text-emerald-100 mb-3 text-lg border-b border-emerald-200 dark:border-emerald-800 pb-2">🛒 Ingrédients</h4>
@@ -340,10 +417,15 @@ export default function AIChef() {
 
             {/* Colonne Droite : Préparation */}
             <div className="flex-1 bg-white/40 dark:bg-black/20 p-6 rounded-2xl border border-emerald-100 dark:border-emerald-800/50">
-              <h4 className="font-bold text-gray-800 dark:text-emerald-100 mb-4 text-lg">👨‍🍳 Préparation</h4>
+              <h4 className="font-bold text-gray-800 dark:text-emerald-100 mb-4 text-lg flex items-center gap-2">
+                👨‍🍳 Préparation 
+                {typingIndex < recipe.instructions.length && (
+                  <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
+                )}
+              </h4>
               <ol className="space-y-4">
-                {recipe.instructions.map((step, i) => (
-                  <li key={i} className="flex items-start gap-3 text-gray-700 dark:text-emerald-100/90">
+                {recipe.instructions.slice(0, typingIndex + 1).map((step, i) => (
+                  <li key={i} className="flex items-start gap-3 text-gray-700 dark:text-emerald-100/90 animate-in fade-in slide-in-from-left-2 duration-500">
                     <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold mt-0.5">
                       {i + 1}
                     </span>
