@@ -25,7 +25,7 @@ const translations: Translations = {
   "nav.history": { en: "History", fr: "Historique", ar: "تاريخي", dar: "تاريخي" },
   "nav.createRecipe": { en: "Create Recipe", fr: "Créer une Recette", ar: "إنشاء وصفة", dar: "صنع وصفة" },
   "nav.weekly": { en: "Weekly Plan", fr: "Plan Hebdo", ar: "خطة أسبوعية", dar: "خطة سمانة" },
-  "nav.tasks": { en: "Daily Goals", fr: "Objectifs", ar: "أهداف يومية", dar: "أهداف يومية" },
+  "nav.tasks": { en: "Daily Goals", fr: "Objectifs Quotidiens", ar: "أهداف يومية", dar: "أهداف يومية" },
   "nav.hub": { en: "Health Hub", fr: "Espace Santé", ar: "مركز الصحة", dar: "ركن الصحة" },
   "nav.community": { en: "Community", fr: "Communauté", ar: "المجتمع", dar: "المجتمع" },
   "nav.scanner": { en: "Scanner", fr: "Scanner", ar: "ماسح", dar: "سكانير" },
@@ -128,13 +128,6 @@ const translations: Translations = {
   "recipeBuilder.portionSize": { en: "Typical Portion Size (g)", fr: "Portion Typique (g)", ar: "حجم الحصة النموذجي (غ)", dar: "حجم الحصة العادي (غ)" },
   "recipeBuilder.saveButton": { en: "Save Custom Recipe", fr: "Enregistrer la Recette", ar: "حفظ الوصفة", dar: "خبي الوصفة" },
   
-  // Dietitians Directory
-  "dietitians.title": { en: "Dietitians Directory", fr: "Annuaire des Diététiciens", ar: "دليل أخصائيي التغذية", dar: "دليل المختصين" },
-  "dietitians.disclaimer": { en: "Mizen is an educational tool. For personalized medical advice, please consult these verified professionals.", fr: "Mizen est un outil éducatif. Pour des conseils médicaux personnalisés, veuillez consulter ces professionnels vérifiés.", ar: "ميزان أداة تعليمية. للحصول على استشارة طبية شخصية، يرجى استشارة هؤلاء المهنيين المعتمدين.", dar: "ميزان أداة تعليمية. إلا احتجت نصيحة طبية شخصية، شوف مع هادو المختصين." },
-  "dietitians.wilayaFilter": { en: "Filter by Wilaya", fr: "Filtrer par Wilaya", ar: "تصفية حسب الولاية", dar: "خير الولاية" },
-  "dietitians.specialtyFilter": { en: "Filter by Specialty", fr: "Filtrer par Spécialité", ar: "تصفية حسب التخصص", dar: "خير التخصص" },
-  "dietitians.all": { en: "All", fr: "Tous", ar: "الكل", dar: "الكل" },
-  "dietitians.noResults": { en: "No professionals found matching your filters.", fr: "Aucun professionnel trouvé pour ces critères.", ar: "لم يتم العثور على أي متخصصين يطابقون تصفيتك.", dar: "مالقينا حتى مختص بهاد الشروط." },
 
   // Weekly Planner
   "weekly.title": { en: "Weekly Meal Plan", fr: "Plan Hebdomadaire", ar: "خطة الوجبات الأسبوعية", dar: "خطة الماكلة د السمانة" },

@@ -99,7 +99,7 @@ export default function Home() {
             onClick={() => { setMode('tasks'); setIsMenuOpen(false); }}
             className={`py-2 px-2 text-base font-bold transition-all flex items-center gap-4 ${mode === 'tasks' ? 'text-emerald-400' : 'text-emerald-100/70 hover:text-emerald-50'}`}
           >
-            <span className="text-xl opacity-80">✅</span> {t('nav.tasks')}
+            <span className="text-xl opacity-80">🎯</span> {t('nav.tasks')}
           </button>
 
           <div className="h-px w-full bg-emerald-900/30 my-4"></div>
