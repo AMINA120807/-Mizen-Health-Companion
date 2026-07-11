@@ -117,6 +117,69 @@ export default function AIChef() {
         "Plier en forme de cigare (ou rectangle) en rabattant les bords.",
         "Frire dans une poêle avec de l'huile chaude jusqu'à dorure. Égoutter sur papier absorbant."
       ]
+    },
+    {
+      id: "pizza_maison",
+      title: "Pizza Maison Italienne 🇮🇹",
+      desc: "Une délicieuse pizza simple et rapide avec les ingrédients du bord.",
+      calories: 280,
+      time: "25 min",
+      coreIngredients: ["pate", "pizza", "tomate", "fromage", "mozzarella", "champignon", "champignons"],
+      ingredients: ["Pâte à pizza", "Sauce tomate", "Fromage râpé ou Mozzarella", "Origan", "Huile d'olive", "Garniture au choix (champignons, poivrons...)"],
+      instructions: [
+        "Préchauffer le four au maximum (220-250°C).",
+        "Étaler la pâte à pizza sur une plaque.",
+        "Étaler la sauce tomate en laissant 1cm sur les bords.",
+        "Ajouter le fromage, l'origan et votre garniture.",
+        "Cuire au four 10 à 15 minutes jusqu'à ce que la croûte soit dorée."
+      ]
+    },
+    {
+      id: "pates_carbo",
+      title: "Pâtes Carbonara Rapides",
+      desc: "Un plat de pâtes crémeux et gourmand en un rien de temps.",
+      calories: 450,
+      time: "15 min",
+      coreIngredients: ["pate", "pates", "spaghetti", "macaroni", "creme", "oeuf", "fromage", "poulet", "dinde"],
+      ingredients: ["Pâtes au choix", "Crème fraîche ou oeufs", "Fromage râpé", "Poivre noir", "Poulet fumé ou charcuterie halal"],
+      instructions: [
+        "Faire bouillir une grande casserole d'eau salée et cuire les pâtes.",
+        "Dans une poêle, faire dorer la charcuterie ou le poulet.",
+        "Égoutter les pâtes en gardant un peu d'eau de cuisson.",
+        "Mélanger les pâtes, la crème (ou oeufs battus), le fromage et beaucoup de poivre hors du feu.",
+        "Servir immédiatement bien crémeux."
+      ]
+    },
+    {
+      id: "salade_cesar",
+      title: "Salade César au Poulet",
+      desc: "Une salade fraîche, croquante et riche en protéines.",
+      calories: 220,
+      time: "10 min",
+      coreIngredients: ["salade", "laitue", "poulet", "escalope", "fromage", "pain", "crouton"],
+      ingredients: ["Laitue ou Salade verte", "Blanc de poulet grillé", "Croûtons de pain", "Fromage en copeaux", "Sauce César ou Yaourt nature"],
+      instructions: [
+        "Laver et couper la salade en gros morceaux.",
+        "Faire griller le poulet à la poêle et le couper en lamelles.",
+        "Faire dorer des morceaux de pain avec de l'ail pour les croûtons.",
+        "Mélanger le tout avec la sauce et parsemer de fromage."
+      ]
+    },
+    {
+      id: "omelette_legumes",
+      title: "Omelette aux Légumes d'été",
+      desc: "Un repas protéiné et sain avec les légumes qui vous restent.",
+      calories: 180,
+      time: "10 min",
+      coreIngredients: ["oeuf", "oeufs", "omelette", "legume", "legumes", "tomate", "courgette", "epinard"],
+      ingredients: ["Oeufs", "Légumes au choix (tomates, épinards, courgettes...)", "Oignon", "Sel, Poivre", "Huile d'olive"],
+      instructions: [
+        "Battre les oeufs dans un bol avec du sel et du poivre.",
+        "Faire revenir les légumes coupés très fins avec un peu d'oignon dans la poêle.",
+        "Verser les oeufs battus sur les légumes cuits.",
+        "Laisser cuire à feu doux jusqu'à ce que l'omelette soit prise.",
+        "Plier en deux et servir avec du pain complet."
+      ]
     }
   ];
 
@@ -168,21 +231,21 @@ export default function AIChef() {
         return;
       }
       
-      // 4. Sinon (Fallback) : Générer une recette dynamique sur mesure
+      // 4. Sinon (Fallback) : Générer une recette dynamique sur mesure avec JUSTE les ingrédients de l'utilisateur
       const userIngredientsList = ingredients
         .split(/[,;]/)
         .map(i => i.trim())
         .filter(i => i.length > 0);
         
-      if (userIngredientsList.length === 0) userIngredientsList.push("Légumes du frigo");
+      if (userIngredientsList.length === 0) userIngredientsList.push("Ingrédient mystère");
 
-      const staples = ["Huile d'olive", "Ail", "Oignon", "Sel, Poivre et Épices"];
-      const randomStaples = staples.sort(() => 0.5 - Math.random()).slice(0, 2);
-      const finalIngredients = [...userIngredientsList, ...randomStaples];
+      // On n'ajoute PLUS d'ingrédients aléatoires ("randomStaples") comme l'oignon ou l'ail par défaut.
+      // Le Chef se concentre UNIQUEMENT sur ce que l'utilisateur a donné.
+      const finalIngredients = [...userIngredientsList];
       
       const mainIngredient = userIngredientsList[0];
       const secondIngredient = userIngredientsList.length > 1 ? userIngredientsList[1] : "";
-      const cookingMethods = ["Poêlée santé", "Salade tiède", "Gratin express", "Plat mijoté"];
+      const cookingMethods = ["Poêlée minute", "Salade express", "Gratin simple", "Papillote légère", "Mijoté maison", "Bowl santé"];
       const method = cookingMethods[Math.floor(Math.random() * cookingMethods.length)];
       
       const dynamicTitle = secondIngredient 
@@ -191,16 +254,17 @@ export default function AIChef() {
 
       const generatedFallbackRecipe: Recipe = {
         title: dynamicTitle,
-        desc: "Une recette unique improvisée par le Chef Mizen avec ce que vous avez sous la main !",
-        calories: Math.floor(Math.random() * 300) + 150, 
-        time: `${Math.floor(Math.random() * 20) + 10} min`,
+        desc: "Une recette 100% sur-mesure utilisant UNIQUEMENT les ingrédients que vous avez listés (assaisonnement libre) !",
+        calories: Math.floor(Math.random() * 250) + 100, 
+        time: `${Math.floor(Math.random() * 15) + 5} min`,
         ingredients: finalIngredients,
         instructions: [
-          `Laver, éplucher et préparer tous les ingrédients, en particulier : ${mainIngredient}.`,
-          `Faire chauffer un peu de matière grasse dans une poêle ou une marmite.`,
-          `Faire revenir les ingrédients principaux avec de l'ail ou de l'oignon pour donner du goût.`,
-          `Assaisonner avec du sel, du poivre et vos épices préférées.`,
-          `Laisser cuire à feu moyen en remuant régulièrement jusqu'à ce que tout soit bien tendre et doré.`
+          `Préparez vos ingrédients : lavez et découpez ${userIngredientsList.join(", ")}.`,
+          `Choisissez votre mode de cuisson préféré (poêle, four ou vapeur).`,
+          `Si vous le souhaitez, vous pouvez ajouter une petite pincée de sel, de poivre et un filet d'huile d'olive (optionnel).`,
+          `Commencez par cuire ${mainIngredient} en premier car c'est votre ingrédient principal.`,
+          secondIngredient ? `Incorporez ensuite ${secondIngredient} et le reste de vos ingrédients.` : `Laissez cuire doucement jusqu'à ce que ce soit tendre.`,
+          `Servez bien chaud et savourez cette recette personnalisée !`
         ]
       };
       
