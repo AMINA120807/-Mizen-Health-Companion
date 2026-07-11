@@ -234,7 +234,7 @@ export default function AIChef() {
       // Sinon, on calcule les macros avec mockFoods
       
       const userIngredientsList = ingredients
-        .split(/[,;]/)
+        .split(/[\n,;]+/)
         .map(i => i.trim())
         .filter(i => i.length > 0);
         
