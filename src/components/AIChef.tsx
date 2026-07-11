@@ -19,7 +19,7 @@ interface Recipe {
 }
 
 export default function AIChef() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [ingredients, setIngredients] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -252,6 +252,9 @@ export default function AIChef() {
       const carbs: string[] = [];
       const others: string[] = [];
 
+      const isAr = language === 'ar' || language === 'dar';
+      const isEn = language === 'en';
+
       userIngredientsList.forEach(ing => {
         const normIng = normalize(ing);
         // Trouver l'aliment qui matche le mieux
@@ -272,7 +275,10 @@ export default function AIChef() {
           
           // Formater précisément
           const portionText = matchedFood.typical_portion_label ? `${matchedFood.typical_portion_label} (${matchedFood.typical_portion_grams}g)` : `100g`;
-          preciseIngredients.push(`${portionText} de ${ingName}`);
+          
+          if (isEn) preciseIngredients.push(`${portionText} of ${ingName}`);
+          else if (isAr) preciseIngredients.push(`${portionText} من ${ingName}`);
+          else preciseIngredients.push(`${portionText} de ${ingName}`);
 
           // Catégoriser pour la recette
           const cat = matchedFood.category;
@@ -282,12 +288,14 @@ export default function AIChef() {
           else others.push(ingName);
 
         } else {
-          preciseIngredients.push(`Quantité au choix de ${ingName}`);
+          if (isEn) preciseIngredients.push(`Quantity of your choice of ${ingName}`);
+          else if (isAr) preciseIngredients.push(`الكمية التي تختارها من ${ingName}`);
+          else preciseIngredients.push(`Quantité au choix de ${ingName}`);
           
           // Guessing pour les ingrédients non trouvés
-          if (normIng.includes("poulet") || normIng.includes("viande") || normIng.includes("oeuf")) meats.push(ingName);
-          else if (normIng.includes("tomate") || normIng.includes("oignon")) veggies.push(ingName);
-          else if (normIng.includes("riz") || normIng.includes("pate")) carbs.push(ingName);
+          if (normIng.includes("poulet") || normIng.includes("viande") || normIng.includes("oeuf") || normIng.includes("chicken") || normIng.includes("meat")) meats.push(ingName);
+          else if (normIng.includes("tomate") || normIng.includes("oignon") || normIng.includes("tomato") || normIng.includes("onion")) veggies.push(ingName);
+          else if (normIng.includes("riz") || normIng.includes("pate") || normIng.includes("rice") || normIng.includes("pasta")) carbs.push(ingName);
           else others.push(ingName);
         }
       });
@@ -321,50 +329,77 @@ export default function AIChef() {
       const mainIngredient = userIngredientsList[0];
       const secondIngredient = userIngredientsList.length > 1 ? userIngredientsList[1] : "";
       
+      const isAr = language === 'ar' || language === 'dar';
+      const isEn = language === 'en';
+      
       let method = "Poêlée";
-      if (meats.length > 0 && carbs.length === 0) method = "Sauté hyperprotéiné";
-      else if (veggies.length > 0 && meats.length === 0) method = "Plat végétarien";
-      else if (carbs.length > 0) method = "Bowl santé";
-      else method = ["Poêlée express", "Papillote légère", "Mijoté maison"][Math.floor(Math.random() * 3)];
+      if (meats.length > 0 && carbs.length === 0) method = isEn ? "High-Protein Stir-fry" : isAr ? "طبق مقلي غني بالبروتين" : "Sauté hyperprotéiné";
+      else if (veggies.length > 0 && meats.length === 0) method = isEn ? "Vegetarian Dish" : isAr ? "طبق نباتي" : "Plat végétarien";
+      else if (carbs.length > 0) method = isEn ? "Healthy Bowl" : isAr ? "وعاء صحي" : "Bowl santé";
+      else method = isEn ? "Quick Skillet" : isAr ? "مقلات سريعة" : "Poêlée express";
       
       const dynamicTitle = secondIngredient 
-        ? `${method} de ${mainIngredient.charAt(0).toUpperCase() + mainIngredient.slice(1)} et ${secondIngredient}`
-        : `${method} à base de ${mainIngredient.charAt(0).toUpperCase() + mainIngredient.slice(1)}`;
+        ? `${method} : ${mainIngredient.charAt(0).toUpperCase() + mainIngredient.slice(1)} & ${secondIngredient}`
+        : `${method} : ${mainIngredient.charAt(0).toUpperCase() + mainIngredient.slice(1)}`;
 
       const finalIngredients = [...preciseIngredients];
 
-      // Génération dynamique des instructions
+      // Génération dynamique des instructions traduites
       const smartInstructions: string[] = [];
       
       if (veggies.length > 0) {
-        smartInstructions.push(`Lavez, épluchez et coupez vos légumes (${veggies.join(", ")}).`);
+        if (isEn) smartInstructions.push(`Wash, peel and chop your vegetables (${veggies.join(", ")}).`);
+        else if (isAr) smartInstructions.push(`اغسل وقشر وقطع الخضار (${veggies.join(", ")}).`);
+        else smartInstructions.push(`Lavez, épluchez et coupez vos légumes (${veggies.join(", ")}).`);
       }
       
-      smartInstructions.push(`Faites chauffer une poêle ou une marmite avec un léger filet d'huile d'olive.`);
+      if (isEn) smartInstructions.push(`Heat a pan or pot with a light drizzle of olive oil.`);
+      else if (isAr) smartInstructions.push(`سخن مقلاة أو قدر مع القليل من زيت الزيتون.`);
+      else smartInstructions.push(`Faites chauffer une poêle ou une marmite avec un léger filet d'huile d'olive.`);
       
       if (meats.length > 0) {
-        smartInstructions.push(`Commencez par faire revenir vos protéines (${meats.join(", ")}) pour bien les dorer de chaque côté.`);
+        if (isEn) smartInstructions.push(`Start by browning your proteins (${meats.join(", ")}) on each side.`);
+        else if (isAr) smartInstructions.push(`ابدأ بتحمير البروتينات (${meats.join(", ")}) من كل جانب.`);
+        else smartInstructions.push(`Commencez par faire revenir vos protéines (${meats.join(", ")}) pour bien les dorer de chaque côté.`);
       }
       
       if (veggies.length > 0) {
-        const addedTo = meats.length > 0 ? "Ajoutez ensuite les légumes" : "Faites revenir les légumes";
-        smartInstructions.push(`${addedTo} et laissez cuire à feu moyen jusqu'à ce qu'ils soient tendres.`);
+        const addedToEn = meats.length > 0 ? "Then add the vegetables" : "Sauté the vegetables";
+        const addedToAr = meats.length > 0 ? "ثم أضف الخضار" : "اقلي الخضار";
+        const addedToFr = meats.length > 0 ? "Ajoutez ensuite les légumes" : "Faites revenir les légumes";
+        
+        if (isEn) smartInstructions.push(`${addedToEn} and cook on medium heat until tender.`);
+        else if (isAr) smartInstructions.push(`${addedToAr} واطبخها على نار متوسطة حتى تصبح طرية.`);
+        else smartInstructions.push(`${addedToFr} et laissez cuire à feu moyen jusqu'à ce qu'ils soient tendres.`);
       }
       
       if (carbs.length > 0) {
-        smartInstructions.push(`Pendant ce temps, faites cuire ${carbs.join(", ")} (si nécessaire) dans une casserole d'eau bouillante, puis incorporez-les au mélange.`);
+        if (isEn) smartInstructions.push(`Meanwhile, cook ${carbs.join(", ")} in boiling water if needed, then mix it in.`);
+        else if (isAr) smartInstructions.push(`في هذه الأثناء، اطبخ ${carbs.join(", ")} في ماء مغلي إذا لزم الأمر، ثم امزجها مع الباقي.`);
+        else smartInstructions.push(`Pendant ce temps, faites cuire ${carbs.join(", ")} (si nécessaire) dans l'eau bouillante, puis incorporez.`);
       }
       
       if (others.length > 0) {
-        smartInstructions.push(`Ajoutez le reste de vos ingrédients : ${others.join(", ")}.`);
+        if (isEn) smartInstructions.push(`Add the rest of your ingredients: ${others.join(", ")}.`);
+        else if (isAr) smartInstructions.push(`أضف باقي المكونات: ${others.join(", ")}.`);
+        else smartInstructions.push(`Ajoutez le reste de vos ingrédients : ${others.join(", ")}.`);
       }
       
-      smartInstructions.push(`Assaisonnez à votre goût avec du sel, du poivre et vos épices préférées, puis laissez mijoter quelques minutes pour lier les saveurs.`);
-      smartInstructions.push(`Servez bien chaud. Ce repas sur-mesure est parfaitement équilibré et vous apportera environ ${totalProt}g de protéines !`);
+      if (isEn) smartInstructions.push(`Season to taste with salt, pepper, and spices, and let it simmer for a few minutes.`);
+      else if (isAr) smartInstructions.push(`تبل بالملح والفلفل والبهارات حسب الذوق، واتركه يغلي لبضع دقائق.`);
+      else smartInstructions.push(`Assaisonnez à votre goût avec du sel, du poivre et vos épices préférées, puis laissez mijoter.`);
+
+      if (isEn) smartInstructions.push(`Serve hot. This custom meal gives you around ${totalProt}g of protein!`);
+      else if (isAr) smartInstructions.push(`قدمه ساخناً. هذه الوجبة المخصصة تمنحك حوالي ${totalProt} غرام من البروتين!`);
+      else smartInstructions.push(`Servez bien chaud. Ce repas sur-mesure vous apportera environ ${totalProt}g de protéines !`);
+
+      const descEn = "A 100% custom recipe using ONLY the ingredients you listed!";
+      const descAr = "وصفة مخصصة 100٪ باستخدام المكونات التي ذكرتها فقط!";
+      const descFr = "Une recette 100% sur-mesure utilisant UNIQUEMENT les ingrédients que vous avez listés !";
 
       const generatedFallbackRecipe: Recipe = {
         title: dynamicTitle,
-        desc: "Une recette 100% sur-mesure utilisant UNIQUEMENT les ingrédients que vous avez listés (assaisonnement libre) !",
+        desc: isEn ? descEn : isAr ? descAr : descFr,
         calories: totalCals,
         protein: totalProt,
         carbs: totalCarbs,
@@ -459,7 +494,9 @@ export default function AIChef() {
                 )}
               </div>
               
-              <h4 className="font-bold text-gray-800 dark:text-emerald-100 mb-3 text-lg border-b border-emerald-200 dark:border-emerald-800 pb-2">🛒 Ingrédients</h4>
+              <h4 className="font-bold text-gray-800 dark:text-emerald-100 mb-3 text-lg border-b border-emerald-200 dark:border-emerald-800 pb-2">
+                🛒 {language === 'en' ? 'Ingredients' : language === 'ar' || language === 'dar' ? 'المكونات' : 'Ingrédients'}
+              </h4>
               <ul className="space-y-2">
                 {recipe.ingredients.map((ing, i) => (
                   <li key={i} className="flex items-start gap-2 text-gray-700 dark:text-emerald-100/90">
@@ -472,7 +509,7 @@ export default function AIChef() {
             {/* Colonne Droite : Préparation */}
             <div className="flex-1 bg-white/40 dark:bg-black/20 p-6 rounded-2xl border border-emerald-100 dark:border-emerald-800/50">
               <h4 className="font-bold text-gray-800 dark:text-emerald-100 mb-4 text-lg flex items-center gap-2">
-                👨‍🍳 Préparation 
+                👨‍🍳 {language === 'en' ? 'Preparation' : language === 'ar' || language === 'dar' ? 'طريقة التحضير' : 'Préparation'}
                 {typingIndex < recipe.instructions.length && (
                   <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
                 )}
