@@ -73,33 +73,33 @@ export default function Home() {
           <div className="text-xs font-black uppercase tracking-widest text-emerald-400 flex items-center gap-2 mb-2 px-2">🍽️ REPAS & RECETTES</div>
           <button 
             onClick={() => { setMode('standard'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'standard' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'standard' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">🍽️</span> {t('nav.dailyMeal')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">🍽️</span> {t('nav.dailyMeal')}
           </button>
           <button 
             onClick={() => { setMode('weekly'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'weekly' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'weekly' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">📅</span> {t('nav.weekly')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">📅</span> {t('nav.weekly')}
           </button>
           <button 
             onClick={() => { setMode('recipe'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'recipe' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'recipe' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">🍳</span> {t('nav.createRecipe')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">🍳</span> {t('nav.createRecipe')}
           </button>
           <button 
             onClick={() => { setMode('history'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'history' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'history' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">📊</span> {t('nav.history')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">📊</span> {t('nav.history')}
           </button>
           <button 
             onClick={() => { setMode('tasks'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'tasks' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'tasks' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">🎯</span> {t('nav.tasks')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">🎯</span> {t('nav.tasks')}
           </button>
 
           <div className="h-px w-full bg-emerald-800/40 my-3"></div>
@@ -108,33 +108,33 @@ export default function Home() {
           <div className="text-xs font-black uppercase tracking-widest text-emerald-400 flex items-center gap-2 mb-2 px-2">⭐ SANTÉ & OUTILS</div>
           <button 
             onClick={() => { setMode('hub'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'hub' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'hub' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">⭐</span> {t('nav.hub')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">⭐</span> {t('nav.hub')}
           </button>
           <button 
             onClick={() => { setMode('chef'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'chef' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'chef' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">🧑‍🍳</span> {t('nav.chef')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">🧑‍🍳</span> {t('nav.chef')}
           </button>
           <button 
             onClick={() => { setMode('scanner'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'scanner' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'scanner' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">📸</span> {t('nav.scanner')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">📸</span> {t('nav.scanner')}
           </button>
           <button 
             onClick={() => { setMode('community'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'community' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'community' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">🌍</span> {t('nav.community')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">🌍</span> {t('nav.community')}
           </button>
           <button 
             onClick={() => { setMode('ramadan'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'ramadan' ? 'bg-orange-500/20 text-orange-400 scale-[1.02] shadow-lg border border-orange-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-orange-300 hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'ramadan' ? 'bg-orange-500/20 text-orange-400 scale-[1.02] shadow-lg border border-orange-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-orange-300 hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">🌙</span> {t('nav.ramadanMode')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">🌙</span> {t('nav.ramadanMode')}
           </button>
 
           <div className="h-px w-full bg-emerald-800/40 my-3"></div>
@@ -143,15 +143,15 @@ export default function Home() {
           <div className="text-xs font-black uppercase tracking-widest text-emerald-400 flex items-center gap-2 mb-2 px-2">⚙️ APPLICATION</div>
           <button 
             onClick={() => { setMode('profile'); setIsMenuOpen(false); }}
-            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'profile' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2'}`}
+            className={`w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group ${mode === 'profile' ? 'bg-emerald-500/20 text-emerald-300 scale-[1.02] shadow-lg border border-emerald-500/30' : 'text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4'}`}
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">👤</span> {t('nav.profile')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">👤</span> {t('nav.profile')}
           </button>
           <button 
             onClick={() => { setShowInstallModal(true); setIsMenuOpen(false); }}
-            className="w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-2"
+            className="w-full text-left py-3 px-4 text-base font-bold rounded-xl transition-all duration-300 flex items-center gap-4 group text-emerald-50 hover:bg-white/10 hover:text-white hover:translate-x-4"
           >
-            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-110">📱</span> {t('nav.installApp')}
+            <span className="text-2xl drop-shadow-md transition-transform duration-300 group-hover:scale-125">📱</span> {t('nav.installApp')}
           </button>
         </div>
       </div>
